@@ -1,5 +1,6 @@
 <template>
   <div class="myMain">
+    <my-phone-drawer/>
     <left-main class="left-main"/>
     <center-main class="center-main"/>
     <right-main class="right-main"/>
@@ -12,6 +13,7 @@ import leftMain from './leftMain'
 import centerMain from './centerMain'
 import rightMain from './rightMain'
 import myDrawer from './myDrawer'
+import myPhoneDrawer from './myPhoneDrawer'
 
 export default {
   name: 'myMain',
@@ -19,7 +21,8 @@ export default {
     leftMain,
     centerMain,
     rightMain,
-    myDrawer
+    myDrawer,
+    myPhoneDrawer
   }
 }
 </script>

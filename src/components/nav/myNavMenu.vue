@@ -2,13 +2,19 @@
   <div>
     <div class="allNav">
       <el-row>
-        <el-col :span="4" class="col-logo">
+        <el-col v-if="$store.state.isPhone" :xs="2" :sm="4" class="col-logo">
+          <!--title-->
+          <div class="i-menu" @click="showMenu">
+            <i class="el-icon-menu"></i>
+          </div>
+        </el-col>
+        <el-col :xs="19" :sm="4" class="col-logo">
           <!--title-->
           <div class="logo">
             <my-logo/>
           </div>
         </el-col>
-        <el-col :span="14" class="hidden-sm-and-down">
+        <el-col :xs="0" :sm="14" class="hidden-sm-and-down">
           <!--nav menu-->
           <div class="menu">
             <my-el-menu/>
@@ -26,7 +32,7 @@
             </div>
           </div>
         </el-col>
-        <el-col :span="6">
+        <el-col :xs="6" :sm="6">
           <div class="nav-right">
             <my-msg/>
             <my-avatar/>
@@ -65,6 +71,9 @@ export default {
     },
     searchFocus () {
       this.isFocus = true
+    },
+    showMenu () {
+      this.$store.commit('changePhoneDrawer', true)
     }
   }
 }
@@ -83,9 +92,11 @@ export default {
     display: flex;
     align-items: center;
   }
-  .allNav .nav-left{
+
+  .allNav .nav-left {
     margin-left: 18px;
   }
+
   .allNav .nav-right {
     display: flex;
     align-items: center;
@@ -93,7 +104,17 @@ export default {
     right: 10px;
     top: 15px;
   }
-
+  .allNav .i-menu{
+     position: absolute;
+     left: 15px;
+     top: 13px;
+   }
+  .allNav .i-menu .el-icon-menu{
+    font-size: 30px;
+  }
+  .el-icon-menu:hover{
+    color: #7f9ba9;
+  }
   .line {
     border: 1px solid #ebebeb;
   }

@@ -1,16 +1,12 @@
 <template>
   <div>
     <el-drawer
-      :visible.sync="$store.state.drawer"
+      :visible.sync="$store.state.phoneDrawer"
       :direction="direction"
       :before-close="handleCloseWithDrawer"
       :with-header="false"
       :size="$store.state.isPhone ? '50%':'18%'">
       <div>
-        <div class="drawer-head">
-          <el-avatar class="head-img" :size="100" icon="el-icon-user-solid" :src=headPath></el-avatar>
-          <span>weiqiyou</span>
-        </div>
         <div class="drawer-menu">
           <el-menu
             default-active="1"
@@ -41,14 +37,11 @@
 </template>
 
 <script>
-import constantVar from '@/tools/constantVar.js'
 export default {
-  name: 'myDrawer',
+  name: 'myPhoneDrawer',
   data () {
     return {
-      // drawer: this.$store.state.drawer,
-      headPath: constantVar.headPath,
-      direction: 'rtl'
+      direction: 'ltr'
     }
   },
   created () {
@@ -59,7 +52,7 @@ export default {
   },
   methods: {
     handleCloseWithDrawer (done) {
-      this.$store.commit('changeDrawer', false)
+      this.$store.commit('changePhoneDrawer', false)
     },
     handleOpenWithMenu (key, keyPath) {
       console.log(key, keyPath)
