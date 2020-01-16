@@ -5,9 +5,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    /* 抽屉打开状态 */
     drawer: false,
+    /* 手机抽屉打开状态 */
     phoneDrawer: false,
-    isPhone: false
+    /* 是否是手机 */
+    isPhone: false,
+    unReadMsg: 2001
   },
   mutations: {
     changeDrawer (state, val) {
@@ -18,6 +22,9 @@ export default new Vuex.Store({
     },
     changeIsPhone (state, val) {
       state.isPhone = val
+    },
+    changeUnReadMsg (state, val) {
+      state.unReadMsg = val
     }
   },
   actions: {},

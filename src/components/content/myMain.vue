@@ -12,8 +12,8 @@
 import leftMain from './leftMain'
 import centerMain from './centerMain'
 import rightMain from './rightMain'
-import myDrawer from './myDrawer'
-import myPhoneDrawer from './myPhoneDrawer'
+import myDrawer from '../drawer/myDrawer'
+import myPhoneDrawer from '../drawer/myPhoneDrawer'
 
 export default {
   name: 'myMain',

@@ -1,6 +1,6 @@
 <template>
   <div class="msg-container">
-    <el-badge :value="12" class="item">
+    <el-badge :value="$store.state.unReadMsg">
     <el-popover
       placement="top-start"
       width="160"

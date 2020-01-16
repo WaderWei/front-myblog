@@ -11,5 +11,6 @@ export default {
 
 <style scoped>
   .container{
+    background-color: #f9f9f9;
   }
 </style>

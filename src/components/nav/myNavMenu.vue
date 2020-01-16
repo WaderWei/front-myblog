@@ -8,7 +8,7 @@
             <i class="el-icon-menu"></i>
           </div>
         </el-col>
-        <el-col :xs="19" :sm="4" class="col-logo">
+        <el-col :xs="22" :sm="4" class="col-logo">
           <!--title-->
           <div class="logo">
             <my-logo/>
@@ -32,9 +32,9 @@
             </div>
           </div>
         </el-col>
-        <el-col :xs="6" :sm="6">
+        <el-col :xs="3" :sm="6">
           <div class="nav-right">
-            <my-msg/>
+            <my-msg class="hidden-sm-and-down"/>
             <my-avatar/>
           </div>
         </el-col>
@@ -107,7 +107,7 @@ export default {
   .allNav .i-menu{
      position: absolute;
      left: 15px;
-     top: 13px;
+     top: 15px;
    }
   .allNav .i-menu .el-icon-menu{
     font-size: 30px;

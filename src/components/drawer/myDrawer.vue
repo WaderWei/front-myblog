@@ -1,12 +1,16 @@
 <template>
   <div>
     <el-drawer
-      :visible.sync="$store.state.phoneDrawer"
+      :visible.sync="$store.state.drawer"
       :direction="direction"
       :before-close="handleCloseWithDrawer"
       :with-header="false"
       :size="$store.state.isPhone ? '50%':'18%'">
       <div>
+        <div class="drawer-head">
+          <el-avatar class="head-img" :size="100" icon="el-icon-user-solid" :src=headPath></el-avatar>
+          <span>weiqiyou</span>
+        </div>
         <div class="drawer-menu">
           <el-menu
             default-active="1"
@@ -26,6 +30,12 @@
               <span slot="title">我的收藏</span>
             </el-menu-item>
             <el-menu-item index="4" class="item">
+              <el-badge :value="$store.state.unReadMsg" :is-dot="$store.state.unReadMsg > 999" class="badgeMsg">
+                <i class="el-icon-chat-dot-round"></i>
+              </el-badge>
+              <span slot="title">消息中心</span>
+            </el-menu-item>
+            <el-menu-item index="5" class="item">
               <i class="el-icon-turn-off"></i>
               <span slot="title">退出</span>
             </el-menu-item>
@@ -37,11 +47,14 @@
 </template>
 
 <script>
+import constantVar from '@/tools/constantVar.js'
 export default {
-  name: 'myPhoneDrawer',
+  name: 'myDrawer',
   data () {
     return {
-      direction: 'ltr'
+      // drawer: this.$store.state.drawer,
+      headPath: constantVar.headPath,
+      direction: 'rtl'
     }
   },
   created () {
@@ -52,7 +65,7 @@ export default {
   },
   methods: {
     handleCloseWithDrawer (done) {
-      this.$store.commit('changePhoneDrawer', false)
+      this.$store.commit('changeDrawer', false)
     },
     handleOpenWithMenu (key, keyPath) {
       console.log(key, keyPath)
@@ -84,9 +97,12 @@ export default {
     border-top: 1px solid gainsboro;
   }
   .drawer-menu .item:first-child {
-    margin-top: 50px;
+    margin-top: 30px;
   }
   .drawer-menu .item:last-child {
     border-bottom: 1px solid gainsboro;
+  }
+  .badgeMsg{
+    display: flex;
   }
 </style>
