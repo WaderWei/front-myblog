@@ -4,6 +4,7 @@
       :visible.sync="$store.state.drawer"
       :direction="direction"
       :before-close="handleCloseWithDrawer"
+      @select="handleSelect"
       :with-header="false"
       :size="$store.state.isPhone ? '50%':'18%'">
       <div>
@@ -64,6 +65,12 @@ export default {
   watch: {
   },
   methods: {
+    handleSelect (key, keyPath) {
+      console.log(key, keyPath)
+      if (this.classPhone) {
+        this.$store.commit('changePhoneDrawer', false)
+      }
+    },
     handleCloseWithDrawer (done) {
       this.$store.commit('changeDrawer', false)
     },
