@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import leftMain from './leftMain'
-import centerMain from './centerMain'
-import rightMain from './rightMain'
-import myDrawer from '../drawer/myDrawer'
-import myPhoneDrawer from '../drawer/myPhoneDrawer'
+import leftMain from '@/components/content/leftMain'
+import centerMain from '@/components/content/centerMain'
+import rightMain from '@/components/content/rightMain'
+import myDrawer from '@/components/drawer/myDrawer'
+import myPhoneDrawer from '@/components/drawer/myPhoneDrawer'
 
 export default {
   name: 'myMain',
@@ -33,12 +33,12 @@ export default {
     flex-direction: row;
   }
   .left-main{
-    flex-grow: 1;
+    flex-grow: 2;
   }
   .center-main{
     flex-grow: 8;
   }
   .right-main{
-    flex-grow: 1;
+    flex-grow: 2;
   }
 </style>

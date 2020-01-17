@@ -8,7 +8,7 @@
 
 <script>
 import myNavMenu from '@/components/nav/myNavMenu'
-import myMain from '@/components/content/myMain'
+import myMain from '@/views/home/myMain'
 import myFooter from '@/components/foot/myFooter'
 export default {
   name: 'index',

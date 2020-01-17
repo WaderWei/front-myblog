@@ -8,17 +8,24 @@
     <div>
       <my-hot-article/>
     </div>
+    <!--分割线-->
+    <div class="dividing-line"></div>
+    <div>
+      <my-home-article/>
+    </div>
   </div>
 </template>
 
 <script>
 import myCarousel from './center/myCarousel'
 import myHotArticle from './center/myHotArticle'
+import myHomeArticle from './center/myHomeArticle'
 export default {
   name: 'centerMain',
   components: {
     myCarousel,
-    myHotArticle
+    myHotArticle,
+    myHomeArticle
   }
 }
 </script>

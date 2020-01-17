@@ -41,7 +41,7 @@ new Vue({
             that.$store.commit('changeIsPhone', true)
           }
           that.isResize = true
-        }, 50)
+        }, 5)
       }
     }
   },
