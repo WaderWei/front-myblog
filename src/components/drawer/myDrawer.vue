@@ -4,7 +4,6 @@
       :visible.sync="$store.state.drawer"
       :direction="direction"
       :before-close="handleCloseWithDrawer"
-      @select="handleSelect"
       :with-header="false"
       :size="$store.state.isPhone ? '50%':'18%'">
       <div>
@@ -16,6 +15,7 @@
           <el-menu
             default-active="1"
             class="el-menu-vertical-demo"
+            @select="handleSelect"
             @open="handleOpenWithMenu"
             @close="handleCloseWithMenu">
             <el-menu-item index="1" class="item">
@@ -67,9 +67,7 @@ export default {
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
-      if (this.classPhone) {
-        this.$store.commit('changePhoneDrawer', false)
-      }
+      this.$store.commit('changeDrawer', false)
     },
     handleCloseWithDrawer (done) {
       this.$store.commit('changeDrawer', false)

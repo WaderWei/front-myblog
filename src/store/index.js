@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    userInfo: {},
     /* 抽屉打开状态 */
     drawer: false,
     /* 手机抽屉打开状态 */
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
     changeUnReadMsg (state, val) {
       state.unReadMsg = val
+    },
+    saveUserInfo (state, userInfo) {
+      state.userInfo = userInfo
     }
   },
   actions: {},

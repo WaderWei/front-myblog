@@ -1,46 +1,41 @@
 <template>
   <div>
     <div class="allNav">
-      <el-row>
-        <el-col v-if="$store.state.isPhone" :xs="2" :sm="4" class="col-logo">
-          <!--title-->
-          <div class="i-menu" @click="showMenu">
-            <i class="el-icon-menu"></i>
+      <!--open menu icon-->
+      <div class="i-menu" @click="showMenu" v-if="$store.state.isPhone">
+        <i class="el-icon-menu"></i>
+      </div>
+      <!--logo-->
+      <div style="margin-top: 3px" :class="{logo:$store.state.isPhone}">
+        <my-logo/>
+      </div>
+      <!--nav menu-->
+      <div class="menu" v-if="!$store.state.isPhone">
+        <my-el-menu/>
+        <div class="nav-left">
+          <!--search-->
+          <div class="search">
+            <el-input
+              @blur="searchBlur"
+              @focus="searchFocus"
+              placeholder="请输入要查找的内容"
+              v-model="searchKey">
+              <i slot="prefix" class="el-input__icon el-icon-search" :class="{ searchFocus:isFocus }"></i>
+            </el-input>
           </div>
-        </el-col>
-        <el-col :xs="22" :sm="4" class="col-logo">
-          <!--title-->
-          <div class="logo">
-            <my-logo/>
-          </div>
-        </el-col>
-        <el-col :xs="0" :sm="14" class="hidden-sm-and-down">
-          <!--nav menu-->
-          <div class="menu">
-            <my-el-menu/>
-            <div class="nav-left">
-              <!--search-->
-              <div class="search">
-                <el-input
-                  @blur="searchBlur"
-                  @focus="searchFocus"
-                  placeholder="请输入要查找的内容"
-                  v-model="searchKey">
-                  <i slot="prefix" class="el-input__icon el-icon-search" :class="{ searchFocus:isFocus }"></i>
-                </el-input>
-              </div>
-            </div>
-          </div>
-        </el-col>
-        <el-col :xs="3" :sm="6">
-          <div class="nav-right">
-            <my-msg class="hidden-sm-and-down"/>
-            <my-avatar/>
-          </div>
-        </el-col>
-      </el-row>
+        </div>
+      </div>
+      <!--heard-->
+      <div class="nav-right">
+        <div class="login" v-if="true">
+          <my-msg class="hidden-sm-and-down"/>
+          <my-avatar/>
+        </div>
+        <div class="unLogin" v-else>
+
+        </div>
+      </div>
     </div>
-    <div class="line"></div>
   </div>
 </template>
 
@@ -65,6 +60,9 @@ export default {
       isFocus: false
     }
   },
+  created () {
+    console.log(this.$store.state.userInfo.userName)
+  },
   methods: {
     searchBlur () {
       this.isFocus = false
@@ -81,42 +79,60 @@ export default {
 
 <style scoped>
   .allNav {
-    margin: 15px 0;
-  }
-
-  .col-logo {
-    display: block;
+    display: flex;
+    padding: 10px 0 0 0;
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    border-bottom: 5px solid #f9f9f9;
+    top: 0;
   }
 
   .allNav .menu {
     display: flex;
     align-items: center;
+    margin-left: 15px;
+    margin-bottom: 12px;
   }
 
   .allNav .nav-left {
     margin-left: 18px;
   }
 
-  .allNav .nav-right {
+  .allNav .nav-right .login{
     display: flex;
     align-items: center;
     position: absolute;
     right: 10px;
-    top: 15px;
+    top: 25px;
   }
-  .allNav .i-menu{
-     position: absolute;
-     left: 15px;
-     top: 15px;
-   }
-  .allNav .i-menu .el-icon-menu{
+
+  .allNav .nav-right .unLogin{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    top: 25px;
+  }
+
+  .allNav .i-menu {
+    position: absolute;
+    left: 15px;
+    top: 28px;
+  }
+  .allNav .logo{
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+
+  .allNav .i-menu .el-icon-menu {
     font-size: 30px;
   }
-  .el-icon-menu:hover{
+
+  .el-icon-menu:hover {
     color: #7f9ba9;
-  }
-  .line {
-    border: 1px solid #ebebeb;
   }
 
   .searchFocus {

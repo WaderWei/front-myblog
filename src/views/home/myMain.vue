@@ -33,12 +33,12 @@ export default {
     flex-direction: row;
   }
   .left-main{
-    flex-grow: 2;
+    flex-grow: 4;
   }
   .center-main{
     flex-grow: 8;
   }
   .right-main{
-    flex-grow: 2;
+    flex-grow: 4;
   }
 </style>

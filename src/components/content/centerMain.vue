@@ -8,7 +8,6 @@
     <div>
       <my-hot-article/>
     </div>
-    <!--分割线-->
     <div class="dividing-line"></div>
     <div>
       <my-home-article/>

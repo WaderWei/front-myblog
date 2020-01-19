@@ -35,7 +35,7 @@ new Vue({
         this.isResize = false
         let that = this
         setTimeout(() => {
-          if (val > 420) {
+          if (val > 768) {
             that.$store.commit('changeIsPhone', false)
           } else {
             that.$store.commit('changeIsPhone', true)
