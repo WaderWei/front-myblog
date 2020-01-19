@@ -88,6 +88,8 @@ export default {
   }
 
   .home-other {
+    width: 360px;
+    height: 360px;
     flex-grow: 1;
   }
 

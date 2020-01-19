@@ -27,12 +27,15 @@
       </div>
       <!--heard-->
       <div class="nav-right">
-        <div class="login" v-if="true">
+        <div class="logined" v-if="false">
           <my-msg class="hidden-sm-and-down"/>
           <my-avatar/>
         </div>
         <div class="unLogin" v-else>
-
+          <el-link class="login" :underline="false" type="primary">登录</el-link>
+          <div class="interval" v-if="!$store.state.isPhone"></div>
+          <div class="phoneInterval" v-else></div>
+          <el-link class="register" style="margin-right: 3px" :underline="false" type="danger">注册</el-link>
         </div>
       </div>
     </div>
@@ -101,7 +104,7 @@ export default {
     margin-left: 18px;
   }
 
-  .allNav .nav-right .login{
+  .allNav .nav-right .logined {
     display: flex;
     align-items: center;
     position: absolute;
@@ -109,12 +112,27 @@ export default {
     top: 25px;
   }
 
-  .allNav .nav-right .unLogin{
+  .allNav .nav-right .unLogin {
     display: flex;
     align-items: center;
     position: absolute;
     right: 10px;
-    top: 25px;
+    top: 28px;
+  }
+  .allNav .nav-right .unLogin .interval {
+    padding: 3px;
+    background-color: gray;
+    margin: 0 30px;
+    border-radius: 5px;
+  }
+  .allNav .nav-right .unLogin .phoneInterval{
+    height: 20px;
+    padding: 0 1px;
+    margin: 0 3px;
+    background-color: #c1c1c1;
+  }
+  .allNav .nav-right .unLogin .el-link {
+    font-size: 22px !important;
   }
 
   .allNav .i-menu {
@@ -122,7 +140,8 @@ export default {
     left: 15px;
     top: 28px;
   }
-  .allNav .logo{
+
+  .allNav .logo {
     flex-grow: 1;
     margin-right: 10px;
   }
