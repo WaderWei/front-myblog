@@ -1,5 +1,5 @@
 <template>
-  <div class="home-article-container">
+  <div class="home-article-container animated  fadeInLeftBig">
     <div class="home-article-item-container">
       <div v-for="(item,index) in 10" :key="index">
         <div class="home-article-item">

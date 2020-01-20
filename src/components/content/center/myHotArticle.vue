@@ -1,5 +1,5 @@
 <template>
-  <div class="hot-article-contain">
+  <div class="hot-article-contain animated zoomIn">
     <div class="header">
         <span>
           热门推荐

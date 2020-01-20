@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="allNav">
+    <div class="allNav animated fadeInUp">
       <!--open menu icon-->
       <div class="i-menu" @click="showMenu" v-if="$store.state.isPhone">
         <i class="el-icon-menu"></i>
@@ -32,10 +32,10 @@
           <my-avatar/>
         </div>
         <div class="unLogin" v-else>
-          <el-link class="login" :underline="false" type="primary">登录</el-link>
+          <el-link class="login" :underline="false" type="primary" @click="clickLoginBtn">登录</el-link>
           <div class="interval" v-if="!$store.state.isPhone"></div>
           <div class="phoneInterval" v-else></div>
-          <el-link class="register" style="margin-right: 3px" :underline="false" type="danger">注册</el-link>
+          <el-link class="register" style="margin-right: 3px" :underline="false" type="danger" @click="clickRegisterBtn">注册</el-link>
         </div>
       </div>
     </div>
@@ -75,6 +75,12 @@ export default {
     },
     showMenu () {
       this.$store.commit('changePhoneDrawer', true)
+    },
+    clickLoginBtn () {
+      this.$router.push({ name: 'login' })
+    },
+    clickRegisterBtn () {
+      this.$router.push({ name: 'register' })
     }
   }
 }

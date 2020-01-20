@@ -1,6 +1,6 @@
 <template>
   <!--走马灯-->
-  <div class="carousel">
+  <div class="carousel animated fadeInDown">
     <el-carousel :interval="3000" type="card">
       <el-carousel-item>
         <div class="title">

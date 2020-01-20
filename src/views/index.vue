@@ -1,7 +1,7 @@
 <template>
   <div class="contain">
     <transition name="fade">
-      <my-nav-menu v-show="isNavShow" class="nav"/>
+      <my-nav-menu v-show="isNavShow" @openLoginDialog="openLogin" class="nav"/>
     </transition>
     <div class="line"></div>
     <router-view class="main"/>
@@ -21,7 +21,8 @@ export default {
   },
   data () {
     return {
-      isNavShow: true
+      isNavShow: true,
+      loginVisible: false
     }
   },
   mounted () {
@@ -40,6 +41,11 @@ export default {
         this.isNavShow = false
       }
       oldTop = top// 更新旧的位置
+    }
+  },
+  methods: {
+    openLogin () {
+      this.loginVisible = true
     }
   }
 }
@@ -63,11 +69,13 @@ export default {
     margin-top: 90px;
     border: 5px solid #f9f9f9;
   }
+
   .fade-enter-active,
   .fade-leave-active {
     transition: all 1.0s;
   }
-  .fade-enter, .fade-leave-to{
+
+  .fade-enter, .fade-leave-to {
     opacity: 0;
     height: 0;
   }
