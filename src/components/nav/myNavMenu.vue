@@ -27,7 +27,7 @@
       </div>
       <!--heard-->
       <div class="nav-right">
-        <div class="logined" v-if="false">
+        <div class="logined" v-if="$store.state.userInfo.phoneNum">
           <my-msg class="hidden-sm-and-down"/>
           <my-avatar/>
         </div>
@@ -64,7 +64,7 @@ export default {
     }
   },
   created () {
-    console.log(this.$store.state.userInfo.userName)
+    console.log(this.$store.state.userInfo.phoneNum)
   },
   methods: {
     searchBlur () {

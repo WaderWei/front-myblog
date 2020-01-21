@@ -3,9 +3,6 @@
   <div class="carousel animated fadeInDown">
     <el-carousel :interval="3000" type="card">
       <el-carousel-item>
-        <div class="title">
-          <a href="#">司法所发生是否所发生的是否是否是否是否</a>
-        </div>
         <img :src="require('@/assets/2.jpg')" class="img">
       </el-carousel-item>
       <el-carousel-item>
