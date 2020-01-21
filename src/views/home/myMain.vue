@@ -1,10 +1,8 @@
 <template>
   <div class="myMain">
-    <my-phone-drawer/>
     <left-main class="left-main"/>
     <center-main class="center-main"/>
     <right-main class="right-main"/>
-    <my-drawer class="my-drawer"/>
   </div>
 </template>
 
@@ -12,17 +10,13 @@
 import leftMain from '@/components/content/leftMain'
 import centerMain from '@/components/content/centerMain'
 import rightMain from '@/components/content/rightMain'
-import myDrawer from '@/components/drawer/myDrawer'
-import myPhoneDrawer from '@/components/drawer/myPhoneDrawer'
 
 export default {
   name: 'myMain',
   components: {
     leftMain,
     centerMain,
-    rightMain,
-    myDrawer,
-    myPhoneDrawer
+    rightMain
   }
 }
 </script>

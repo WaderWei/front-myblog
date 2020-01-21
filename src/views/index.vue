@@ -6,18 +6,24 @@
     <div class="line"></div>
     <router-view class="main"/>
     <my-footer class="footer"/>
+    <my-phone-drawer/>
+    <my-drawer class="my-drawer"/>
   </div>
 </template>
 
 <script>
 import myNavMenu from '@/components/nav/myNavMenu'
 import myFooter from '@/components/foot/myFooter'
+import myDrawer from '@/components/drawer/myDrawer'
+import myPhoneDrawer from '@/components/drawer/myPhoneDrawer'
 
 export default {
   name: 'index',
   components: {
     myNavMenu,
-    myFooter
+    myFooter,
+    myDrawer,
+    myPhoneDrawer
   },
   data () {
     return {

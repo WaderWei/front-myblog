@@ -14,6 +14,11 @@ const routes = [
         path: 'main',
         name: 'main',
         component: () => import('@/views/home/myMain.vue')
+      },
+      {
+        path: 'articlesList',
+        name: 'articlesList',
+        component: () => import('@/views/list/articlesList.vue')
       }
     ],
     redirect: '/main'
@@ -27,6 +32,11 @@ const routes = [
     path: '/register',
     name: 'register',
     component: () => import('@/views/home/register.vue')
+  },
+  {
+    path: '/md',
+    name: 'md',
+    component: () => import('@/views/test/MarkDownDemo.vue')
   }
 ]
 

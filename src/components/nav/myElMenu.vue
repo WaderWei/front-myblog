@@ -2,32 +2,39 @@
   <div>
     <el-menu :default-active="activeIndex" class="el-menu-demo" :class="{phoneStyle:classPhone}" :mode="modePhoneMenu"
              @select="handleSelect">
-      <el-menu-item index="1">
-        <i class="el-icon-location" v-if="classPhone"></i>
-        <span>导航一</span>
+      <el-menu-item index="main">
+        <i class="el-icon-s-home" v-if="classPhone"></i>
+        <span>首<span style="visibility: hidden" v-if="classPhone">占位</span>页</span>
       </el-menu-item>
-      <el-submenu index="2">
+      <el-submenu index="technology">
         <template slot="title">
-          <i class="el-icon-menu" v-if="classPhone"></i>
-          <span slot="title">导航二</span>
+          <i class="el-icon-s-promotion" v-if="classPhone"></i>
+          <span slot="title">技术分享</span>
         </template>
-        <el-menu-item index="2-1">模块2-1</el-menu-item>
-        <el-menu-item index="2-2">模块2-2</el-menu-item>
-        <el-menu-item index="2-3">模块2-3</el-menu-item>
-        <el-submenu index="2-4">
-          <template slot="title">模块2-4</template>
-          <el-menu-item index="2-4-1">模块2-4-1</el-menu-item>
-          <el-menu-item index="2-4-2">模块2-4-2</el-menu-item>
-          <el-menu-item index="2-4-3">模块2-4-3</el-menu-item>
+        <el-submenu index="tech-front">
+          <template slot="title">前端</template>
+          <el-menu-item index="tech-front-basic" style="margin-left: 20px">基础</el-menu-item>
+          <el-menu-item index="tech-front-frame" style="margin-left: 20px">框架</el-menu-item>
+          <el-menu-item index="tech-front-other" style="margin-left: 20px">其它</el-menu-item>
+        </el-submenu>
+        <el-submenu index="tech-back">
+          <template slot="title">后端</template>
+          <el-menu-item index="tech-back-basic" style="margin-left: 20px">基础</el-menu-item>
+          <el-menu-item index="tech-back-frame" style="margin-left: 20px">框架</el-menu-item>
+          <el-menu-item index="tech-back-other" style="margin-left: 20px">其它</el-menu-item>
+        </el-submenu>
+        <el-submenu index="tech-other">
+          <template slot="title">其它</template>
+          <el-menu-item index="tech-other-other" style="margin-left: 20px">其它</el-menu-item>
         </el-submenu>
       </el-submenu>
-      <el-menu-item index="3">
-        <i class="el-icon-menu" v-if="classPhone"></i>
-        <span slot="title">导航三</span>
+      <el-menu-item index="life">
+        <i class="el-icon-s-operation" v-if="classPhone"></i>
+        <span slot="title">生活分享</span>
       </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-menu" v-if="classPhone"></i>
-        <span slot="title">导航四</span>
+      <el-menu-item index="others">
+        <i class="el-icon-mic" v-if="classPhone"></i>
+        <span slot="title">其它分享</span>
       </el-menu-item>
     </el-menu>
     <div class="line" v-if="classPhone"></div>
@@ -49,15 +56,27 @@ export default {
   },
   data () {
     return {
-      activeIndex: '1'
+      activeIndex: 'main',
+      currentIndex: '首页'
     }
   },
   methods: {
     handleSelect (key, keyPath) {
-      console.log(key, keyPath)
+      // 如果是手机样式则选择后关闭
       if (this.classPhone) {
         this.$store.commit('changePhoneDrawer', false)
       }
+      // 点击当前页面无效
+      if (key === this.currentIndex) {
+        return
+      }
+      if (key === 'main') {
+        this.$router.push({ path: '/' })
+      } else {
+        this.$router.push({ name: 'articlesList', query: { keyWord: key } })
+      }
+
+      this.currentIndex = key
     }
   }
 }
