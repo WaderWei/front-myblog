@@ -93,7 +93,7 @@ export default {
     width: 100%;
     height: 80px;
     position: fixed;
-    z-index: 100;
+    z-index: 100000;
     background-color: white;
     border-bottom: 5px solid #f9f9f9;
     top: 0;

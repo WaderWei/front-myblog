@@ -99,6 +99,7 @@ export default {
 
   .home-article-item {
     height: 120px;
+    padding: 0 10px;
   }
 
   .item-img-container {
