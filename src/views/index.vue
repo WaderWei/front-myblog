@@ -31,6 +31,9 @@ export default {
       loginVisible: false
     }
   },
+  created () {
+
+  },
   mounted () {
     let oldTop = 0 // 旧数据，初始为0
     // 将自定义方法绑定到窗口滚动条事件

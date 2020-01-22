@@ -25,14 +25,16 @@ export default {
 </script>
 
 <style scoped>
-  .carousel{
+  .carousel {
   }
-  .carousel .img{
-    object-fit: fill;
-    height:100%;
-    width:100%;
+
+  .carousel .img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
   }
-  .carousel .title{
+
+  .carousel .title {
     position: absolute;
     left: 10px;
     bottom: 10px;

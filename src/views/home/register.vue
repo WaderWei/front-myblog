@@ -24,7 +24,7 @@
           <div class="verCode">
             <el-input
               class="animated fadeInRight"
-              prefix-icon="el-icon-key"
+              prefix-icon="el-icon-unlock"
               placeholder="请输入验证码" v-model="verificationCode" clearable
               @focus="phoneFocus">
             </el-input>
@@ -106,7 +106,7 @@ export default {
     flex-direction: row;
     justify-content: center;
     font-weight: bold;
-    color: #0b84ff;
+    color: #66B1FF;
     margin: 30px 0;
   }
 

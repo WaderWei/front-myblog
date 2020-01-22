@@ -82,6 +82,7 @@ export default {
     height: 100%;
     background-color: #eceefe;
     background: url("../../assets/loginbg.jpg") no-repeat;
+    background-size: cover;
   }
 
   .logo {
@@ -105,7 +106,7 @@ export default {
     flex-direction: row;
     justify-content: center;
     font-weight: bold;
-    color: #0b84ff;
+    color: #66B1FF;
     margin: 30px 0;
   }
 
