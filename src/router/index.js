@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import index from '../views/index.vue'
+import main from '@/views/home/centerMain.vue'
 
 Vue.use(VueRouter)
 
@@ -13,7 +14,12 @@ const routes = [
       {
         path: 'main',
         name: 'main',
-        component: () => import('@/views/home/myMain.vue')
+        component: main
+      },
+      {
+        path: '/writeBlog',
+        name: 'writeBlog',
+        component: () => import('@/views/add/writeBlog.vue')
       },
       {
         path: 'articlesList',

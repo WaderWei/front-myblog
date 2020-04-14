@@ -1,7 +1,10 @@
 <template>
   <div class="article-container">
-    {{keyWord}}-
-    {{chineseKeyWord}}
+    <div class="article-head">
+      <div>面包屑</div>
+      <div>分类</div>
+      <div>排序</div>
+    </div>
   </div>
 </template>
 
@@ -31,6 +34,17 @@ export default {
 
 <style scoped>
   .article-container{
-   height: 100%;
+    height: 100%;
+    max-width: 1200px;
+    background: orange;
+    margin: 0 auto;
+  }
+  .article-head{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .article-head > div {
+    border-bottom: 1px solid gray;
   }
 </style>

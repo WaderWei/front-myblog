@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Cookies from 'js-cookie'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    language: Cookies.get('language') || 'zh',
     userInfo: {},
     /* 抽屉打开状态 */
     drawer: false,
@@ -31,6 +33,11 @@ export default new Vuex.Store({
       state.userInfo = userInfo
     }
   },
-  actions: {},
+  actions: {
+    SET_LANGUAGE: (state, language) => {
+      state.language = language
+      Cookies.set('language', language)
+    }
+  },
   modules: {}
 })

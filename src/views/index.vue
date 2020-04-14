@@ -4,7 +4,11 @@
       <my-nav-menu v-show="isNavShow" @openLoginDialog="openLogin" class="nav"/>
     </transition>
     <div class="line"></div>
-    <router-view class="main"/>
+    <div class="myMain">
+      <left-main class="left-main"/>
+      <router-view class="main"/>
+      <right-main class="right-main"/>
+    </div>
     <my-footer class="footer"/>
     <my-phone-drawer/>
     <my-drawer class="my-drawer"/>
@@ -16,6 +20,8 @@ import myNavMenu from '@/components/nav/myNavMenu'
 import myFooter from '@/components/foot/myFooter'
 import myDrawer from '@/components/drawer/myDrawer'
 import myPhoneDrawer from '@/components/drawer/myPhoneDrawer'
+import leftMain from '@/components/content/leftMain'
+import rightMain from '@/components/content/rightMain'
 
 export default {
   name: 'index',
@@ -23,7 +29,9 @@ export default {
     myNavMenu,
     myFooter,
     myDrawer,
-    myPhoneDrawer
+    myPhoneDrawer,
+    leftMain,
+    rightMain
   },
   data () {
     return {
@@ -65,12 +73,21 @@ export default {
   }
 
   .nav {
-
   }
 
+  .myMain {
+    display: flex;
+    flex-direction: row;
+  }
+  .left-main{
+    flex-grow: 4;
+  }
+  .right-main{
+    flex-grow: 4;
+  }
   .main {
+    flex-grow: 8;
   }
-
   .footer {
   }
 

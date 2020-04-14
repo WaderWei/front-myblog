@@ -9,7 +9,7 @@
         <i class="el-icon-arrow-right el-icon--right"></i>
       </el-link>
     </div>
-    <div class="hot-contain">
+    <div class="hot-contain" :class="{'phoneArticleNowrap': $store.state.isPhone,'pcArticleWrap':!$store.state.isPhone}">
       <el-card v-for="(item,index) in 4" :key="index" shadow="hover" :body-style="{ padding: '0px' }" :class="{'phoneImageWidth': $store.state.isPhone,'pcImageWidth':!$store.state.isPhone}">
         <a href="#">
           <img :src="require('@/assets/3.jpg')" style="width: 100%;height: 100%"
@@ -35,7 +35,6 @@ export default {
   },
   created () {
     this.isPhone = this.$store.state.isPhone
-    console.log(this.isPhone)
   }
 }
 </script>
@@ -55,9 +54,14 @@ export default {
 
   .hot-article-contain .hot-contain {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    justify-content: space-between;
     margin: 10px;
+  }
+  .phoneArticleNowrap{
+    flex-wrap: wrap;
+  }
+  .pcArticleWrap{
+    flex-wrap: nowrap;
   }
   .article-title{
     font-weight: bold;
@@ -89,7 +93,7 @@ export default {
     margin: 10px 0px;
   }
   .pcImageWidth {
-    width: 360px;
-    margin: 20px 0px;
+    width: 260px;
+    margin: 10px 0px;
   }
 </style>

@@ -1,36 +1,37 @@
 <template>
   <div class="login-container">
-    <div class="logo animated bounceInDown" @click="backHome">
+    <div class="logo animated bounceInDown">
       <my-logo/>
     </div>
     <div class="login-div animated zoomIn">
       <el-card class="box-card">
+        <lang-select class="chose-lang"></lang-select>
         <div class="login-title">
-          <div class="animated bounceInLeft">登</div>
+          <div class="animated bounceInLeft">{{$t('login.title1')}}</div>
           <div class="splitRedis animated bounceInDown"></div>
-          <div class="animated bounceInRight">录</div>
+          <div class="animated bounceInRight">{{$t('login.title2')}}</div>
         </div>
         <div class="login-input">
           <el-input
             class="phoneInput animated rotateInDownLeft"
             ref="phoneInput"
-            placeholder="请输入手机号"
+            :placeholder="$t('login.phonePlaceHolder')"
             prefix-icon="el-icon-phone-outline" v-model="phoneNum" clearable
             @focus="phoneFocus">
           </el-input>
           <el-input class="passwordInput animated rotateInUpRight"
-                    placeholder="请输入密码"
+                    :placeholder="$t('login.pwdPlaceHolder')"
                     prefix-icon="el-icon-key" v-model="password" show-password>
           </el-input>
         </div>
         <div class="remSwitch animated fadeInLeft">
           <div>
-            <span style="color: gray;font-size: 14px">没有账号？</span>
-            <el-link class="regLink" :underline="false" type="primary" @click="goRegister">注册</el-link>
+            <span style="color: gray;font-size: 14px">{{$t('login.noAccountTip')}}</span>
+            <el-link class="regLink" :underline="false" type="primary" @click="goRegister">{{$t('login.register')}}</el-link>
           </div>
           <div>
             <el-switch v-model="rememberPsd"/>
-            <span class="remPsd">记住密码</span>
+            <span class="remPsd">{{$t('login.rememberPsd')}}</span>
           </div>
         </div>
         <el-button class="loginBtn animated rubberBand" type="primary" round @click="login">登录</el-button>
@@ -41,11 +42,13 @@
 
 <script>
 import myLogo from '@/components/nav/myLogo'
+import LangSelect from '@/components/LangSelect'
 
 export default {
   name: 'login',
   components: {
-    myLogo
+    myLogo,
+    LangSelect
   },
   data () {
     return {
@@ -108,6 +111,11 @@ export default {
     font-weight: bold;
     color: #66B1FF;
     margin: 30px 0;
+  }
+  .chose-lang{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
   }
 
   .phoneInput {

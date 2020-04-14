@@ -44,10 +44,10 @@
 
 <script>
 import 'element-ui/lib/theme-chalk/display.css'
-import myLogo from './myLogo'
-import myElMenu from './myElMenu'
-import myAvatar from './myAvatar.vue'
-import myMsg from './myMsg.vue'
+import myLogo from '@/components/nav/myLogo'
+import myElMenu from '@/components/nav/myElMenu'
+import myAvatar from '@/components/nav/myAvatar.vue'
+import myMsg from '@/components/nav/myMsg.vue'
 
 export default {
   name: 'myNavMenu',
@@ -93,7 +93,7 @@ export default {
     width: 100%;
     height: 80px;
     position: fixed;
-    z-index: 100000;
+    z-index: 100;
     background-color: white;
     border-bottom: 5px solid #f9f9f9;
     top: 0;

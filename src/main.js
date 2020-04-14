@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import animated from 'animate.css' // npm install animate.css --save安装，在引入
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import i18n from './lang' // Internationalization
 
 Vue.use(animated)
 Vue.use(ElementUI)
@@ -52,5 +53,6 @@ new Vue({
   },
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount('#app')

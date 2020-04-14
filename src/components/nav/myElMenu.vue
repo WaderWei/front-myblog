@@ -36,6 +36,10 @@
         <i class="el-icon-mic" v-if="classPhone"></i>
         <span slot="title">其它分享</span>
       </el-menu-item>
+      <el-menu-item index="write-blog">
+        <i class="el-icon-edit" v-if="classPhone"></i>
+        <span slot="title">写博客</span>
+      </el-menu-item>
     </el-menu>
     <div class="line" v-if="classPhone"></div>
   </div>
@@ -60,6 +64,9 @@ export default {
       currentIndex: '首页'
     }
   },
+  created () {
+    this.setCurrentIndex()
+  },
   methods: {
     handleSelect (key, keyPath) {
       // 如果是手机样式则选择后关闭
@@ -72,13 +79,33 @@ export default {
       }
       if (key === 'main') {
         this.$router.push({ path: '/' })
+      } else if (key === 'write-blog') {
+        // 判断是否登录
+        this.$router.push({ name: 'writeBlog', query: { keyWord: key } })
       } else {
+        window.scrollTo(0, 0)
         this.$router.push({ name: 'articlesList', query: { keyWord: key } })
       }
-
       this.currentIndex = key
+    },
+    setCurrentIndex () {
+      let keyWord = this.$route.query.keyWord
+      if (!keyWord) {
+        this.currentIndex = 'main'
+      } else if (keyWord.indexOf('tech') === 0) {
+        this.activeIndex = 'tech-back-basic'
+      } else if (keyWord === 'life') {
+        this.activeIndex = 'life'
+      } else if (keyWord === 'others') {
+        this.activeIndex = 'others'
+      } else if (keyWord === 'write-blog') {
+        this.activeIndex = 'write-blog'
+      } else {
+        this.currentIndex = 'main'
+      }
     }
-  }
+  },
+  watch: {}
 }
 </script>
 

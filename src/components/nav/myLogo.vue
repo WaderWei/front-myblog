@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-title">
+  <div class="blog-title"  @click="backHome">
     <img :src="logoPath">
   </div>
 </template>
@@ -11,6 +11,11 @@ export default {
   data () {
     return {
       logoPath: constantVar.logoPath
+    }
+  },
+  methods: {
+    backHome () {
+      this.$router.replace({ path: '/' })
     }
   }
 }

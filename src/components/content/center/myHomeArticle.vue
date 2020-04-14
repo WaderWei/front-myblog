@@ -58,17 +58,21 @@
     </div>
     <div class="dividing-line" v-if="!$store.state.isPhone"></div>
     <div class="home-other" v-if="!$store.state.isPhone">
-      <my-calendar/>
+      <my-hot-blogers/>
+      <div class="dividing-b-l"></div>
+      <my-hot-label></my-hot-label>
     </div>
   </div>
 </template>
 
 <script>
-import myCalendar from './myCalendar'
+import myHotBlogers from './myHotBlogers'
+import myHotLabel from './myHotLabel'
 export default {
   name: 'myHomeArticle',
   components: {
-    myCalendar
+    myHotBlogers,
+    myHotLabel
   },
   data () {
     return {}
@@ -88,8 +92,7 @@ export default {
   }
 
   .home-other {
-    width: 360px;
-    height: 360px;
+    min-width: 280px;
     flex-grow: 1;
   }
 
@@ -201,5 +204,9 @@ export default {
 
   .pcRowMargin {
     margin: 20px 0 20px 20px;
+  }
+  .dividing-b-l{
+    background: #f9f9f9;
+    height: 10px;
   }
 </style>

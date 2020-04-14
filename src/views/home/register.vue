@@ -5,39 +5,40 @@
     </div>
     <div class="register-div animated zoomIn">
       <el-card class="box-card">
+        <lang-select class="chose-lang"></lang-select>
         <div class="register-title">
-          <div class="animated bounceInLeft">注</div>
+          <div class="animated bounceInLeft">{{$t('register.title1')}}</div>
           <div class="splitRedis animated bounceInDown"></div>
-          <div class="animated bounceInRight">册</div>
+          <div class="animated bounceInRight">{{$t('register.title2')}}</div>
         </div>
         <div class="register-input">
           <el-input
             class="inputStyle animated rotateInDownLeft"
-            placeholder="请输入手机号"
+            :placeholder="$t('register.phonePlaceHolder')"
             prefix-icon="el-icon-phone-outline" v-model="phoneNum" clearable
             @focus="phoneFocus">
           </el-input>
           <el-input class="inputStyle animated rotateInUpRight"
-                    placeholder="请输入密码"
+                    :placeholder="$t('register.pwdPlaceHolder')"
                     prefix-icon="el-icon-key" v-model="password" show-password>
           </el-input>
           <div class="verCode">
             <el-input
               class="animated fadeInRight"
               prefix-icon="el-icon-unlock"
-              placeholder="请输入验证码" v-model="verificationCode" clearable
+              :placeholder="$t('register.CaptchaPlaceHolder')" v-model="verificationCode" clearable
               @focus="phoneFocus">
             </el-input>
-            <el-button class="animated fadeInLeft" type="success">获取验证码</el-button>
+            <el-button class="animated fadeInLeft" type="success">{{$t('register.getCaptcha')}}</el-button>
           </div>
         </div>
         <div class="remSwitch animated fadeInLeft">
           <div>
-            <span style="color: gray;font-size: 14px">已有账号？</span>
-            <el-link class="regLink" :underline="false" type="primary" @click="goLogin">登录</el-link>
+            <span style="color: gray;font-size: 14px">{{$t('register.hasAccountTip')}}</span>
+            <el-link class="regLink" :underline="false" type="primary" @click="goLogin">{{$t('register.login')}}</el-link>
           </div>
         </div>
-        <el-button class="registerBtn animated rubberBand" type="primary" round>注册</el-button>
+        <el-button class="registerBtn animated rubberBand" type="primary" round>{{$t('register.register')}}</el-button>
       </el-card>
     </div>
   </div>
@@ -45,11 +46,12 @@
 
 <script>
 import myLogo from '@/components/nav/myLogo'
-
+import LangSelect from '@/components/LangSelect'
 export default {
   name: 'register',
   components: {
-    myLogo
+    myLogo,
+    LangSelect
   },
   data () {
     return {
@@ -91,6 +93,12 @@ export default {
 
   .register-div {
     width: 320px;
+  }
+
+  .chose-lang{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
   }
 
   .splitRedis {
