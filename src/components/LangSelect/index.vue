@@ -1,7 +1,7 @@
 <template>
   <el-dropdown trigger="click" class="international" @command="handleSetLanguage">
   <span class="el-dropdown-link">
-    {{language === 'zh'?'中文':'English'}}<i class="el-icon-arrow-down el-icon--right"></i>
+    {{$store.state.language === 'zh' ? '中文' : 'English'}}<i class="el-icon-arrow-down el-icon--right"></i>
   </span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item :disabled="language==='zh'" command="zh">中文</el-dropdown-item>
@@ -15,11 +15,6 @@ export default {
   data () {
     return {
       language: this.$store.state.language
-    }
-  },
-  computed: {
-    languageContent () {
-      return this.$store.state.language
     }
   },
   methods: {
