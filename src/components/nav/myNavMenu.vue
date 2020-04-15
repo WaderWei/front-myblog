@@ -18,7 +18,7 @@
             <el-input
               @blur="searchBlur"
               @focus="searchFocus"
-              placeholder="请输入要查找的内容"
+              :placeholder="$t('nav.searchPl')"
               v-model="searchKey">
               <i slot="prefix" class="el-input__icon el-icon-search" :class="{ searchFocus:isFocus }"></i>
             </el-input>
@@ -32,10 +32,10 @@
           <my-avatar/>
         </div>
         <div class="unLogin" v-else>
-          <el-link class="login" :underline="false" type="primary" @click="clickLoginBtn">登录</el-link>
+          <el-link class="login" :underline="false" type="primary" @click="clickLoginBtn">{{$t('login.login')}}</el-link>
           <div class="interval" v-if="!$store.state.isPhone"></div>
           <div class="phoneInterval" v-else></div>
-          <el-link class="register" style="margin-right: 3px" :underline="false" type="danger" @click="clickRegisterBtn">注册</el-link>
+          <el-link class="register" style="margin-right: 3px" :underline="false" type="danger" @click="clickRegisterBtn">{{$t('register.register')}}</el-link>
         </div>
       </div>
     </div>

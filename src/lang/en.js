@@ -19,5 +19,21 @@ export default {
     hasAccountTip: 'Existing Account?',
     getCaptcha: 'get Captcha',
     login: 'login'
+  },
+  nav: {
+    index1: 'Ho',
+    index2: 'me',
+    tech: {
+      index: 'tech share',
+      front: 'front',
+      back: 'back',
+      other: 'other',
+      basic: 'basic',
+      framework: 'frame'
+    },
+    life: 'life share',
+    other: 'other share',
+    white: 'write blog',
+    searchPl: 'Enter search the content'
   }
 }

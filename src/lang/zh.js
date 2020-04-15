@@ -19,5 +19,21 @@ export default {
     hasAccountTip: '已有账号?',
     getCaptcha: '获取验证呀',
     login: '登录'
+  },
+  nav: {
+    index1: '首',
+    index2: '页',
+    tech: {
+      index: '技术分享',
+      front: '前端',
+      back: '后端',
+      other: '其它',
+      basic: '基础',
+      framework: '框架'
+    },
+    life: '生活分享',
+    other: '其它分享',
+    white: '发布博客',
+    searchPl: '请输入要查找的内容'
   }
 }
