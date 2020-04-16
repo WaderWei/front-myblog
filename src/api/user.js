@@ -1,11 +1,10 @@
 import request from '@/tools/request'
 
 export function login (data) {
-  console.log(data)
   return request({
-    url: 'user/login',
-    methods: 'post',
-    data
+    url: 'pub/login',
+    methods: 'get',
+    params: data
   })
 }
 

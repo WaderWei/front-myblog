@@ -3,18 +3,16 @@ import { MessageBox, Message } from 'element-ui'
 import { getToken, removeToken } from '@/tools/auth'
 import constantVar from './constantVar'
 
-// create an axios instance
 const service = axios.create({
-  baseURI: 'http://192.168.0.120:9001/api/pub/login',
-  withCredentials: true,
-  timeout: 5000
+  baseURL: 'http://localhost:9001/api', // api 的 base_url
+  withCredentials: true, // 跨域请求时发送 cookies
+  timeout: 5000 // request timeout
 })
 
 // request interceptor
 
 service.interceptors.request.use(
   config => {
-    console.log(config)
     if (getToken) {
       config.headers[constantVar.TokenKey] = getToken()
     }

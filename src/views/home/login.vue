@@ -70,10 +70,10 @@ export default {
     phoneFocus () {
     },
     login () {
-      login({ phoneNum: this.phoneNum, password: this.password }).then(req => {
-        console.log(req)
+      login({ phone: this.phoneNum, password: this.password }).then(req => {
         this.$router.replace({ path: '/' })
         this.$store.commit('setToken', req.data)
+        console.log(this.$store.state.token)
       }).catch(err => {
         console.log(err)
       })
