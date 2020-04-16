@@ -35,5 +35,32 @@ export default {
     other: '其它分享',
     white: '发布博客',
     searchPl: '请输入要查找的内容'
+  },
+  blog: {
+    title: '文章标题',
+    titlePlaceholder: '文章标题，字数控制在100字以内',
+    category: '文章分类',
+    categoryPlaceholder: '请选择文章分类',
+    type: '文章类型',
+    typePlaceholder: '请选择文章类型',
+    tags: '文章标签',
+    choose: '选择标签',
+    labelPh: 'Enter键入可添加自定义标签',
+    HotRecommendation: '热门推荐',
+    more: '更多',
+    cancel: '取消',
+    confirm: '确定',
+    original: '原创',
+    reproduced: '转载',
+    translation: '翻译',
+    choseTagTip1: '还能添加',
+    choseTagTip2: '个标签',
+    choseTagTip3: '已经不能再添加标签了',
+    releaseWay: '发布形式',
+    public: '公开',
+    private: '私密',
+    vip: 'VIP可见',
+    releaseBtn: '发布文章',
+    saveBtn: '保存草稿'
   }
 }

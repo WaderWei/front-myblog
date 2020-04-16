@@ -2,6 +2,7 @@
 /* 头像路径 */
 const headPath = require('@/assets/head.jpg')
 const logoPath = require('@/assets/logo.png')
+const TokenKey = 'auth-token'
 const phoneWidth = 420
 const menuValues = new Map()
 menuValues.set('main', '首页')
@@ -77,5 +78,6 @@ export default {
   logoPath,
   phoneWidth,
   menuValues,
-  blogCategory
+  blogCategory,
+  TokenKey
 }

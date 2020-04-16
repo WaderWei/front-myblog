@@ -2,25 +2,25 @@
   <div class="white-blog-contain">
     <div class="blog-head">
       <el-form :model="ruleBlog" :rules="rules" ref="ruleBlog" label-width="100px" @submit.native.prevent>
-        <el-form-item label="文章名称" prop="blogTitle" required>
-          <el-input type="text" v-model="ruleBlog.blogTitle" placeholder="文章标题，字数控制在100字以内"
+        <el-form-item :label="$t('blog.title')" prop="blogTitle" required>
+          <el-input type="text" v-model="ruleBlog.blogTitle" :placeholder="$t('blog.titlePlaceholder')"
                     maxlength="100" show-word-limit></el-input>
         </el-form-item>
-        <el-form-item label="文章分类" prop="blogCategory" required>
-          <el-cascader placeholder="请选择文章分类"
+        <el-form-item :label="$t('blog.category')" prop="blogCategory" required>
+          <el-cascader :placeholder="$t('blog.categoryPlaceholder')"
                        v-model="ruleBlog.blogCategory"
                        :options="categoryOptions"
                        @change="handleChange"></el-cascader>
         </el-form-item>
-        <el-form-item label="文章类型" required prop="blogType">
-          <el-select v-model="ruleBlog.blogType" placeholder="请选择活动区域">
-            <el-option label="原创" value="original"></el-option>
-            <el-option label="转载" value="reproduced"></el-option>
-            <el-option label="翻译" value="translation"></el-option>
+        <el-form-item :label="$t('blog.type')" required prop="blogType">
+          <el-select v-model="ruleBlog.blogType" :placeholder="$t('blog.typePlaceholder') ">
+            <el-option :label="$t('blog.original')" value="original"></el-option>
+            <el-option :label="$t('blog.reproduced')" value="reproduced"></el-option>
+            <el-option :label="$t('blog.translation')" value="translation"></el-option>
           </el-select>
         </el-form-item>
         <mavon-editor v-model="value" class="blog-editor"/>
-        <el-form-item label="文章标签" style="margin-top: 20px">
+        <el-form-item :label="$t('blog.tags')" style="margin-top: 20px">
           <div style="display: -webkit-flex;display: flex">
             <el-popover
               placement="bottom"
@@ -30,21 +30,21 @@
               <div class="closePopover" @click="labelPopover = false">
                 <i class="el-icon-close"></i>
               </div>
-              <el-input type="text" v-model="labelTitle" placeholder="Enter键入可添加自定义标签"
+              <el-input type="text" v-model="labelTitle" :placeholder="$t('blog.labelPh')"
                         @keyup.enter.native="selfLabel(labelTitle)" clearable maxlength="10" show-word-limit></el-input>
               <div class="hotLabel">
-                <span>热门推荐</span>
+                <span>{{$t('blog.HotRecommendation')}}</span>
                 <div class="hotLabelList">
                   <el-tag v-for="i in 10" class="tag" type="info" :key="i" @click="selectTag(i)">{{i}}</el-tag>
-                  <el-link :underline="false" style="margin-left: 20px">更多</el-link>
+                  <el-link :underline="false" style="margin-left: 20px">{{$t('blog.more')}}</el-link>
                 </div>
               </div>
               <div style="text-align: right; margin: 10px 0">
-                <el-button size="mini" type="text" @click="labelPopover = false">取消</el-button>
-                <el-button type="primary" size="mini" @click="labelPopover = false">确定</el-button>
+                <el-button size="mini" type="text" @click="labelPopover = false">{{$t('blog.cancel')}}</el-button>
+                <el-button type="primary" size="mini" @click="labelPopover = false">{{$t('blog.confirm')}}</el-button>
               </div>
               <el-button type="text" slot="reference">
-                <i class="el-icon-circle-plus-outline" style="margin-right: 10px"></i>选择标签</el-button>
+                <i class="el-icon-circle-plus-outline" style="margin-right: 10px"></i>{{$t('blog.choose')}}</el-button>
             </el-popover>
             <div style="margin-left: 30px">
               <el-tag class="tag"
@@ -55,24 +55,24 @@
                 {{tag}}
               </el-tag>
             </div>
-            <span v-if="selectTagArr.length == 0 && $store.state.isPhone" style="color: green;margin-left: 20px">最多只能添加5个标签</span>
+            <span v-if="selectTagArr.length == 0 && $store.state.isPhone" style="color: green;margin-left: 20px">{{$t('blog.choseTagTip1')}}5{{$t('blog.choseTagTip2')}}</span>
             <div v-if="!$store.state.isPhone">
-              <span v-if="selectTagArr.length <= 2" style="color: green;margin-left: 20px">还能添加{{5-selectTagArr.length}}个标签</span>
-              <span v-else-if="selectTagArr.length <= 4" style="color: orange;margin-left: 20px">还能添加{{5-selectTagArr.length}}个标签</span>
-              <span v-else-if="selectTagArr.length = 5" style="color: red;margin-left: 20px">已经不能再添加标签了</span>
+              <span v-if="selectTagArr.length <= 2" style="color: green;margin-left: 20px">{{$t('blog.choseTagTip1')}}{{5-selectTagArr.length}}{{$t('blog.choseTagTip2')}}</span>
+              <span v-else-if="selectTagArr.length <= 4" style="color: orange;margin-left: 20px">{{$t('blog.choseTagTip1')}}{{5-selectTagArr.length}}{{$t('blog.choseTagTip2')}}</span>
+              <span v-else-if="selectTagArr.length = 5" style="color: red;margin-left: 20px">{{$t('blog.choseTagTip3')}}</span>
             </div>
           </div>
         </el-form-item>
-        <el-form-item label="发布形式" prop="blogPermission">
+        <el-form-item :label="$t('blog.releaseWay')" prop="blogPermission">
           <el-radio-group v-model="ruleBlog.blogPermission">
-            <el-radio label="公开"></el-radio>
-            <el-radio label="私密"></el-radio>
-            <el-radio label="VIP可见"></el-radio>
+            <el-radio :label="$t('blog.public')"></el-radio>
+            <el-radio :label="$t('blog.private')"></el-radio>
+            <el-radio :label="$t('blog.vip')"></el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="postArticle('ruleBlog')">发布文章</el-button>
-          <el-button @click="saveArticle('ruleBlog')">保存草稿</el-button>
+          <el-button type="primary" @click="postArticle('ruleBlog')">{{$t('blog.releaseBtn')}}</el-button>
+          <el-button @click="saveArticle('ruleBlog')">{{$t('blog.saveBtn')}}</el-button>
         </el-form-item>
       </el-form>
     </div>
