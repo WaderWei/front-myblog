@@ -30,11 +30,11 @@
       </el-submenu>
       <el-menu-item index="life">
         <i class="el-icon-s-operation" v-if="classPhone"></i>
-        <span slot="title">{{$t('nav.other')}}</span>
+        <span slot="title">{{$t('nav.life')}}</span>
       </el-menu-item>
       <el-menu-item index="others">
         <i class="el-icon-mic" v-if="classPhone"></i>
-        <span slot="title">{{$t('nav.life')}}</span>
+        <span slot="title">{{$t('nav.other')}}</span>
       </el-menu-item>
       <el-menu-item index="write-blog">
         <i class="el-icon-edit" v-if="classPhone"></i>

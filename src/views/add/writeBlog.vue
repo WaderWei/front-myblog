@@ -6,7 +6,7 @@
           <el-input type="text" v-model="ruleBlog.blogTitle" :placeholder="$t('blog.titlePlaceholder')"
                     maxlength="100" show-word-limit></el-input>
         </el-form-item>
-        <el-form-item :label="$t('blog.category')" prop="blogCategory" required>
+        <el-form-item :label="$t('blog.category')" prop="blogCategory" required style="white-space: nowrap">
           <el-cascader :placeholder="$t('blog.categoryPlaceholder')"
                        v-model="ruleBlog.blogCategory"
                        :options="categoryOptions"
@@ -80,8 +80,6 @@
 </template>
 
 <script>
-import constantVar from '@/tools/constantVar.js'
-
 export default {
   name: 'writeBlog',
   data () {
@@ -112,7 +110,59 @@ export default {
           { required: true, message: '请选择活发布形式', trigger: 'change' }
         ]
       },
-      categoryOptions: constantVar.blogCategory,
+      categoryOptions: [{
+        value: 'technology',
+        label: this.$t('nav.tech.index'),
+        children: [{
+          value: 'tech-front',
+          label: this.$t('nav.tech.front'),
+          children: [{
+            value: 'tech-front-basic',
+            label: this.$t('nav.tech.basic')
+          },
+          {
+            value: 'tech-front-frame',
+            label: this.$t('nav.tech.framework')
+          }, {
+            value: 'tech-front-other',
+            label: this.$t('nav.tech.other')
+          }
+          ]
+        },
+        {
+          value: 'tech-back',
+          label: this.$t('nav.tech.back'),
+          children: [{
+            value: 'tech-back-basic',
+            label: this.$t('nav.tech.basic')
+          },
+          {
+            value: 'tech-back-frame',
+            label: this.$t('nav.tech.framework')
+          }, {
+            value: 'tech-back-other',
+            label: this.$t('nav.tech.other')
+          }
+          ]
+        },
+        {
+          value: 'tech-other',
+          label: this.$t('nav.tech.other'),
+          children: [ {
+            value: 'tech-other-other',
+            label: this.$t('nav.tech.other')
+          }
+          ]
+        }] },
+      {
+        value: 'life',
+        label: this.$t('nav.life')
+      },
+      {
+        value: 'others',
+        label: this.$t('nav.other')
+      }
+      ],
       value: '',
       blogTitle: '',
       labelPopover: false,

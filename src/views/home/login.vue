@@ -43,6 +43,7 @@
 <script>
 import myLogo from '@/components/nav/myLogo'
 import LangSelect from '@/components/LangSelect'
+import { login } from '@/api/user'
 
 export default {
   name: 'login',
@@ -69,8 +70,14 @@ export default {
     phoneFocus () {
     },
     login () {
-      this.$store.commit('saveUserInfo', { phoneNum: this.phoneNum, password: this.password })
-      this.$router.replace({ path: '/' })
+      login({ phoneNum: this.phoneNum, password: this.password }).then(req => {
+        console.log(req)
+        this.$router.replace({ path: '/' })
+        this.$store.commit('setToken', req.data)
+      }).catch(err => {
+        console.log(err)
+      })
+      // this.$store.commit('saveUserInfo', { phoneNum: this.phoneNum, password: this.password })
     }
   }
 }
