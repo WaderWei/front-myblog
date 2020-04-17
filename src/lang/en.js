@@ -62,5 +62,13 @@ export default {
     vip: 'VIP visible',
     releaseBtn: 'release article',
     saveBtn: 'save draft'
+  },
+  hot: {
+    HotRecommendation: 'hot recommendation',
+    PopularBloggers: 'popular bloggers',
+    PopularTags: 'popular tags'
+  },
+  footer: {
+    content: 'Live up to the good times'
   }
 }

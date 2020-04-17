@@ -2,10 +2,10 @@
   <div class="hot-article-contain animated zoomIn">
     <div class="header">
         <span>
-          热门推荐
+          {{$t('hot.HotRecommendation')}}
         </span>
       <el-link :underline="false">
-        更多
+        {{$t('blog.more')}}
         <i class="el-icon-arrow-right el-icon--right"></i>
       </el-link>
     </div>

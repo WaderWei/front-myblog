@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="line"></div>
     <div class="container">
-      <span>不负好时光 Copyright © 2020</span>
+      <span>{{$t('footer.content')}} Copyright © 2020</span>
     </div>
   </div>
 </template>

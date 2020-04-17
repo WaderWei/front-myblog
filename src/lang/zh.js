@@ -62,5 +62,13 @@ export default {
     vip: 'VIP可见',
     releaseBtn: '发布文章',
     saveBtn: '保存草稿'
+  },
+  hot: {
+    HotRecommendation: '热门推荐',
+    PopularBloggers: '热门博主',
+    PopularTags: '热门标签'
+  },
+  footer: {
+    content: '不负好时光'
   }
 }

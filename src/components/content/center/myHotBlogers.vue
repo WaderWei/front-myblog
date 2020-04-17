@@ -1,8 +1,8 @@
 <template>
   <el-card class="box-card" shadow="hover">
     <div slot="header" class="hotBlogUsersTitle">
-      <span>热门博主</span>
-      <el-button type="text">更多</el-button>
+      <span>{{$t('hot.PopularBloggers')}}</span>
+      <el-button type="text">{{$t('blog.more')}}</el-button>
     </div>
     <div v-for="o in 4" :key="o" class="hotBloger">
       <div class="blogerImg">

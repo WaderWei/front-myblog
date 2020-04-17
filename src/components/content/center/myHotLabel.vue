@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card" shadow="hover">
     <div slot="header" class="hotLabelTitle">
-      <span>热门标签</span>
+      <span>{{$t('hot.PopularTags')}}</span>
     </div>
     <div class="hotLabelInfo">
       <div v-for="(o,ind) in 4" :key="ind" @mouseenter="mouseIn(ind)" @mouseleave="mouseOut(ind)" class="hotLabel">
