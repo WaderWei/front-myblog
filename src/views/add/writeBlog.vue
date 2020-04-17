@@ -19,7 +19,7 @@
             <el-option :label="$t('blog.translation')" value="translation"></el-option>
           </el-select>
         </el-form-item>
-        <mavon-editor v-model="value" class="blog-editor"/>
+        <mavon-editor v-model="editorValue" class="blog-editor"/>
         <el-form-item :label="$t('blog.tags')" style="margin-top: 20px">
           <div style="display: -webkit-flex;display: flex">
             <el-popover
@@ -64,10 +64,10 @@
           </div>
         </el-form-item>
         <el-form-item :label="$t('blog.releaseWay')" prop="blogPermission">
-          <el-radio-group v-model="ruleBlog.blogPermission">
-            <el-radio :label="$t('blog.public')"></el-radio>
-            <el-radio :label="$t('blog.private')"></el-radio>
-            <el-radio :label="$t('blog.vip')"></el-radio>
+          <el-radio-group v-model="ruleBlog.blogPermission" >
+            <el-radio :label="1" >{{$t('blog.public')}}</el-radio>
+            <el-radio :label="2">{{$t('blog.private')}}</el-radio>
+            <el-radio :label="3">{{$t('blog.vip')}}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item>
@@ -89,25 +89,25 @@ export default {
         blogCategory: '',
         labelTitle: '',
         blogType: '',
-        blogPermission: ''
+        blogPermission: 1 // 1 public 2 private 3 vip
       },
       rules: {
         blogTitle: [
-          { required: true, message: '请输入文章标题', trigger: 'blur' },
-          { min: 1, max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }
+          { required: true, message: this.$t('blog.titleEmptyTip'), trigger: 'blur' },
+          { min: 1, max: 100, message: this.$t('blog.titleLengthTip'), trigger: 'blur' }
         ],
         blogCategory: [
-          { required: true, message: '请选择文章分类', trigger: 'change' }
+          { required: true, message: this.$t('blog.categoryEmptyTip'), trigger: 'change' }
         ],
         labelTitle: [
-          { required: true, message: '请选择文章标签', trigger: 'blur' },
-          { min: 1, max: 100, message: '长度在 1 到 10 个字符', trigger: 'blur' }
+          { required: true, message: this.$t('blog.tagEmptyTip'), trigger: 'blur' },
+          { min: 1, max: 100, message: this.$t('blog.tagLengthTip'), trigger: 'blur' }
         ],
         blogType: [
-          { required: true, message: '请选择文章类型', trigger: 'change' }
+          { required: true, message: this.$t('blog.typeEmptyTip'), trigger: 'change' }
         ],
         blogPermission: [
-          { required: true, message: '请选择活发布形式', trigger: 'change' }
+          { required: true, message: this.$t('blog.releaseTip'), trigger: 'change' }
         ]
       },
       categoryOptions: [{
@@ -163,7 +163,7 @@ export default {
         label: this.$t('nav.other')
       }
       ],
-      value: '',
+      editorValue: '',
       blogTitle: '',
       labelPopover: false,
       labelTitle: '', /* 自定义标签名称 */

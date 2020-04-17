@@ -27,7 +27,7 @@
       </div>
       <!--heard-->
       <div class="nav-right">
-        <div class="logined" v-if="$store.state.userInfo.phoneNum">
+        <div class="logined" v-if="$store.state.userInfo.phone">
           <my-msg class="hidden-sm-and-down"/>
           <my-avatar/>
         </div>
@@ -48,6 +48,7 @@ import myLogo from '@/components/nav/myLogo'
 import myElMenu from '@/components/nav/myElMenu'
 import myAvatar from '@/components/nav/myAvatar.vue'
 import myMsg from '@/components/nav/myMsg.vue'
+import { getInfo } from '@/api/user'
 
 export default {
   name: 'myNavMenu',
@@ -64,7 +65,17 @@ export default {
     }
   },
   created () {
-    console.log(this.$store.state.userInfo.phoneNum)
+    console.log(123)
+    let token = this.$store.token
+    // 登录
+    if (token) {
+      getInfo().then(res => {
+        this.$store.commit('saveUserInfo', res.data)
+      }).catch(err => console.log(err))
+    } else { // 未登录
+      // 清空信息
+      this.$store.userInfo = {}
+    }
   },
   methods: {
     searchBlur () {

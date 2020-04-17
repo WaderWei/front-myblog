@@ -12,7 +12,7 @@ export function getInfo (data) {
   return request({
     url: 'user/info',
     methods: 'get',
-    data
+    params: data
   })
 }
 
