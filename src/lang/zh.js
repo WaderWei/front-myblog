@@ -3,7 +3,7 @@ export default {
     title1: '登',
     title2: '录',
     register: '注册',
-    phonePlaceHolder: '请输入手机号',
+    emailPlaceHolder: '请输入邮箱',
     pwdPlaceHolder: '请输入密码',
     noAccountTip: '没有账号?',
     rememberPsd: '记住密码',
@@ -13,12 +13,19 @@ export default {
     title1: '注',
     title2: '册',
     register: '注册',
-    phonePlaceHolder: '请输入手机号',
+    emailPlaceHolder: '请输入邮箱',
     pwdPlaceHolder: '请输入密码',
     CaptchaPlaceHolder: '请输入验证码',
     hasAccountTip: '已有账号?',
-    getCaptcha: '获取验证呀',
-    login: '登录'
+    getCaptcha: '获取验证',
+    login: '登录',
+    emailNullError: '邮箱不能为空',
+    emailFormatError: '请输入正确的邮箱格式',
+    emailExistError: '此邮箱已经被注册',
+    pswNullError: '密码不能为空',
+    pswFormatError: '密码的长度必须在5-12之间',
+    verityNullError: '验证码不能为空',
+    verityFormatError: '验证码长度必须等于5'
   },
   nav: {
     index1: '首',
@@ -77,5 +84,12 @@ export default {
   },
   footer: {
     content: '不负好时光'
+  },
+  drawer: {
+    home: '个人主页',
+    blog: '发布博客',
+    myCollection: '我的收藏',
+    msgCenter: '我的中心',
+    logout: '退出'
   }
 }

@@ -1,6 +1,7 @@
+/*
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
-import { getToken, removeToken } from '@/tools/auth'
+import { getTokenInLs, removeTokenInLs } from '@/tools/localStore'
 import constantVar from './constantVar'
 
 const service = axios.create({
@@ -10,11 +11,10 @@ const service = axios.create({
 })
 
 // request interceptor
-
 service.interceptors.request.use(
   config => {
-    if (getToken) {
-      config.headers[constantVar.TokenKey] = getToken()
+    if (getTokenInLs()) {
+      config.headers[constantVar.TokenKey] = getTokenInLs()
     }
     return config
   },
@@ -28,22 +28,23 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     if (res.code !== 200) {
-      Message({
-        message: res.message,
+    /!*  Message({
+        message: res.msg,
         type: 'error',
         duration: 5 * 1000
-      })
-      // 50001:非法的token; 50011:Token 过期了;
-      if (res.code === 50001 || res.code === 50011) {
+      }) *!/
+      if (res.code === 30001) {
+        console.log('没有登录')
+      } else if (res.code === 50001 || res.code === 50011) { // 50001:非法的token; 50011:Token 过期了;
         MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
           confirmButtonText: '重新登录',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          removeToken()
+          removeTokenInLs()
           location.reload()
         })
-      } else if (res.code === 60021) {
+      } else if (res.code === 60001) { // 无权限
         Message({
           message: '您没有权限哦',
           type: 'error',
@@ -58,7 +59,7 @@ service.interceptors.response.use(
   error => {
     console.log('err' + error) // for debug
     Message({
-      message: error.message,
+      message: error,
       type: 'error',
       duration: 5 * 1000
     })
@@ -67,3 +68,4 @@ service.interceptors.response.use(
 )
 
 export default service
+*/

@@ -23,8 +23,8 @@ export default {
       this.language = lang
       this.$i18n.locale = lang
       this.$store.dispatch('SET_LANGUAGE', lang)
-      // 切换语言时，刷新一下当前页面，解决form中错误提示语言无法切换问题
-      this.$router.go(0)
+      // 切换语言时，刷新一下当前页面，解决form中错误提示语言无法切换问题,效果很不好，可以跳转到其他页面立刻再调回来
+      // this.$router.go(0)
     }
   }
 }

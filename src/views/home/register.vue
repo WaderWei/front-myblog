@@ -12,33 +12,44 @@
           <div class="animated bounceInRight">{{$t('register.title2')}}</div>
         </div>
         <div class="register-input">
-          <el-input
-            class="inputStyle animated rotateInDownLeft"
-            :placeholder="$t('register.phonePlaceHolder')"
-            prefix-icon="el-icon-phone-outline" v-model="phoneNum" clearable
-            @focus="phoneFocus">
-          </el-input>
-          <el-input class="inputStyle animated rotateInUpRight"
-                    :placeholder="$t('register.pwdPlaceHolder')"
-                    prefix-icon="el-icon-key" v-model="password" show-password>
-          </el-input>
-          <div class="verCode">
-            <el-input
-              class="animated fadeInRight"
-              prefix-icon="el-icon-unlock"
-              :placeholder="$t('register.CaptchaPlaceHolder')" v-model="verificationCode" clearable
-              @focus="phoneFocus">
-            </el-input>
-            <el-button class="animated fadeInLeft" type="success">{{$t('register.getCaptcha')}}</el-button>
-          </div>
+          <el-form :model="registerForm" :rules="rules" ref="registerForm">
+            <el-form-item prop="email" class="spacingStyle">
+              <el-input
+                class="animated rotateInDownLeft"
+                :placeholder="$t('register.emailPlaceHolder')"
+                prefix-icon="el-icon-user" v-model="registerForm.email" clearable
+              >
+              </el-input>
+            </el-form-item>
+            <el-form-item prop="password" class="spacingStyle">
+              <el-input class="animated rotateInUpRight"
+                        :placeholder="$t('register.pwdPlaceHolder')"
+                        prefix-icon="el-icon-key" v-model="registerForm.password" show-password>
+              </el-input>
+            </el-form-item>
+            <div class="verCode">
+              <el-form-item prop="verificationCode">
+                <el-input
+                  class="animated fadeInRight"
+                  prefix-icon="el-icon-unlock"
+                  :placeholder="$t('register.CaptchaPlaceHolder')" v-model="registerForm.verificationCode" clearable
+                >
+                </el-input>
+              </el-form-item>
+              <el-button class="animated fadeInLeft" @click="getCode" type="success">{{$t('register.getCaptcha')}}</el-button>
+            </div>
+          </el-form>
         </div>
         <div class="remSwitch animated fadeInLeft">
           <div>
             <span style="color: gray;font-size: 14px">{{$t('register.hasAccountTip')}}</span>
-            <el-link class="regLink" :underline="false" type="primary" @click="goLogin">{{$t('register.login')}}</el-link>
+            <el-link class="regLink" :underline="false" type="primary" @click="goLogin">{{$t('register.login')}}
+            </el-link>
           </div>
         </div>
-        <el-button class="registerBtn animated rubberBand" type="primary" round>{{$t('register.register')}}</el-button>
+        <el-button class="registerBtn animated rubberBand" type="primary" @click="register" round>
+          {{$t('register.register')}}
+        </el-button>
       </el-card>
     </div>
   </div>
@@ -47,6 +58,7 @@
 <script>
 import myLogo from '@/components/nav/myLogo'
 import LangSelect from '@/components/LangSelect'
+
 export default {
   name: 'register',
   components: {
@@ -54,11 +66,35 @@ export default {
     LangSelect
   },
   data () {
+    let checkEmail = (rule, value, callback) => {
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+      if (!value) {
+        return callback(new Error(this.$t('register.emailNullError')))
+      }
+      if (!mailReg.test(value)) {
+        return callback(new Error(this.$t('register.emailFormatError')))
+      }
+      this.checkEmailIsRegister(value, callback)
+    }
     return {
-      phoneNum: '',
-      password: '',
-      rememberPsd: false,
-      verificationCode: ''
+      registerForm: {
+        email: '',
+        password: '',
+        verificationCode: ''
+      },
+      rules: {
+        email: [
+          { validator: checkEmail, trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: this.$t('register.pswNullError'), trigger: 'blur' },
+          { min: 5, max: 12, message: this.$t('register.pswFormatError'), trigger: 'blur' }
+        ],
+        verificationCode: [
+          { required: true, message: this.$t('register.verityNullError'), trigger: 'blur' },
+          { min: 5, max: 5, message: this.$t('register.verityFormatError'), trigger: 'blur' }
+        ]
+      }
     }
   },
   created () {
@@ -70,7 +106,41 @@ export default {
     goLogin () {
       this.$router.replace({ path: 'login' })
     },
-    phoneFocus () {
+    register () {
+      this.$refs['registerForm'].validate((valid) => {
+        if (valid) {
+          alert('submit!')
+        } else {
+          return false
+        }
+      })
+    },
+    emailFocus () {
+    },
+    async checkEmailIsRegister (val, callback) {
+      let result = await this.$http.get('pub/verifyExist', {
+        params: {
+          email: val
+        }
+      })
+      if (result.data) {
+        return callback()
+      } else { // false 表示已存在
+        return callback(new Error(this.$t('register.emailExistError')))
+      }
+    },
+    getCode () {
+      this.$refs['registerForm'].validateField(['email', 'password'], validateMsg => {
+        if (!validateMsg) {
+          let data = { email: this.registerForm.email, password: this.registerForm.password }
+          this.$http.post('pub/code', this.$qs.stringify(data))
+            .then(res => {
+              if (res.code === 200) {
+
+              }
+            })
+        }
+      })
     }
   }
 }
@@ -95,7 +165,7 @@ export default {
     width: 320px;
   }
 
-  .chose-lang{
+  .chose-lang {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -118,14 +188,16 @@ export default {
     margin: 30px 0;
   }
 
-  .inputStyle {
+  .spacingStyle {
     margin-bottom: 30px;
   }
-  .verCode{
+
+  .verCode {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: flex-start;
   }
+
   .remSwitch {
     display: flex;
     justify-content: space-between;

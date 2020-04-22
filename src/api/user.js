@@ -1,25 +1,25 @@
 import request from '@/tools/request'
 
 export function login (data) {
+  console.log(data)
   return request({
     url: 'pub/login',
-    methods: 'get',
-    params: data
+    methods: 'post',
+    data
   })
 }
 
 export function getInfo (data) {
   return request({
-    url: 'user/info',
+    url: 'authc/user/info',
     methods: 'get',
     params: data
   })
 }
 
-export function logout (data) {
+export function logout () {
   return request({
-    url: 'user/logout',
-    methods: 'post',
-    data
+    url: 'logout',
+    methods: 'post'
   })
 }

@@ -3,7 +3,7 @@ export default {
     title1: 'Login',
     title2: 'Form',
     register: 'register',
-    phonePlaceHolder: 'Please enter phone number',
+    emailPlaceHolder: 'Please enter email',
     pwdPlaceHolder: 'Please enter password',
     noAccountTip: 'No account?',
     rememberPsd: 'Remember psw',
@@ -13,12 +13,19 @@ export default {
     title1: 'Register',
     title2: 'Form',
     register: 'register',
-    phonePlaceHolder: 'Please enter phone number',
+    emailPlaceHolder: 'Please enter email',
     pwdPlaceHolder: 'Please enter password',
     CaptchaPlaceHolder: 'enter Captcha',
     hasAccountTip: 'Existing Account?',
     getCaptcha: 'get Captcha',
-    login: 'login'
+    login: 'login',
+    emailNullError: 'E-mail can not be empty',
+    emailFormatError: 'Please enter the correct email format',
+    emailExistError: 'This email has already been registered',
+    pswNullError: 'password can not be blank',
+    pswFormatError: 'The length of the password must be between 5-12',
+    verityNullError: 'verification code must be filled',
+    verityFormatError: 'Verification code length must be equal to 5'
   },
   nav: {
     index1: 'Ho',
@@ -77,5 +84,12 @@ export default {
   },
   footer: {
     content: 'Live up to the good times'
+  },
+  drawer: {
+    home: 'Home Page',
+    blog: 'Post Blog',
+    myCollection: 'My Collection',
+    msgCenter: 'Message Center',
+    logout: 'Logout'
   }
 }

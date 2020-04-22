@@ -1,7 +1,11 @@
 import Vue from 'vue'
+import 'babel-polyfill'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import axios from 'axios'
+import setAxios from '@/tools/axiosconfig'
+import qs from 'qs'
 /* element ui */
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -10,6 +14,9 @@ import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import i18n from './lang' // Internationalization
 
+Vue.prototype.$qs = qs
+Vue.prototype.$http = axios
+setAxios()
 Vue.use(animated)
 Vue.use(ElementUI)
 Vue.use(mavonEditor)

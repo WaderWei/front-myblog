@@ -20,25 +20,25 @@
             @close="handleCloseWithMenu">
             <el-menu-item index="1" class="item">
               <i class="el-icon-user-solid"></i>
-              <span slot="title">个人主页</span>
+              <span slot="title">{{$t('drawer.home')}}</span>
             </el-menu-item>
             <el-menu-item index="2" class="item">
               <i class="el-icon-edit"></i>
-              <span slot="title">写博客</span>
+              <span slot="title">{{$t('drawer.blog')}}</span>
             </el-menu-item>
             <el-menu-item index="3" class="item">
               <i class="el-icon-star-on"></i>
-              <span slot="title">我的收藏</span>
+              <span slot="title">{{$t('drawer.myCollection')}}</span>
             </el-menu-item>
             <el-menu-item index="4" class="item">
               <el-badge :value="$store.state.unReadMsg" :is-dot="$store.state.unReadMsg > 999" class="badgeMsg">
                 <i class="el-icon-chat-dot-round"></i>
               </el-badge>
-              <span slot="title">消息中心</span>
+              <span slot="title">{{$t('drawer.msgCenter')}}</span>
             </el-menu-item>
             <el-menu-item index="5" class="item">
               <i class="el-icon-turn-off"></i>
-              <span slot="title">退出</span>
+              <span slot="title">{{$t('drawer.logout')}}</span>
             </el-menu-item>
           </el-menu>
         </div>
@@ -49,6 +49,8 @@
 
 <script>
 import constantVar from '@/tools/constantVar.js'
+import { logout } from '@/api/user'
+
 export default {
   name: 'myDrawer',
   data () {
@@ -66,7 +68,22 @@ export default {
   },
   methods: {
     handleSelect (key, keyPath) {
-      console.log(key, keyPath)
+      console.log(key)
+      switch (key) {
+        case '1':
+          break
+        case '2':
+          break
+        case '3':
+          break
+        case '4':
+          break
+        case '5':
+          this.$http.get().then(res => {
+            this.$store.commit('removeToken')
+          }).catch(err => console.log(err))
+          break
+      }
       this.$store.commit('changeDrawer', false)
     },
     handleCloseWithDrawer (done) {

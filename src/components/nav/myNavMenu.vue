@@ -27,7 +27,7 @@
       </div>
       <!--heard-->
       <div class="nav-right">
-        <div class="logined" v-if="$store.state.userInfo.phone">
+        <div class="logined" v-if="$store.state.userInfo">
           <my-msg class="hidden-sm-and-down"/>
           <my-avatar/>
         </div>
@@ -65,16 +65,13 @@ export default {
     }
   },
   created () {
-    console.log(123)
-    let token = this.$store.token
+    let token = this.$store.state.token
     // 登录
     if (token) {
-      getInfo().then(res => {
-        this.$store.commit('saveUserInfo', res.data)
-      }).catch(err => console.log(err))
-    } else { // 未登录
-      // 清空信息
-      this.$store.userInfo = {}
+      this.$http.get('authc/user/info')
+        .then(res => {
+          this.$store.commit('saveUserInfo', res.data)
+        }).catch(err => console.log(err))
     }
   },
   methods: {

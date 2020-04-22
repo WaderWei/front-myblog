@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Cookies from 'js-cookie'
-import { setToken, getToken } from '../tools/auth'
+import { setTokenInLs, getTokenInLs, removeTokenInLs } from '../tools/localStore'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     language: Cookies.get('language') || 'zh',
-    token: getToken() || '',
-    userInfo: {},
+    token: getTokenInLs() || null,
+    userInfo: null,
     /* 抽屉打开状态 */
     drawer: false,
     /* 手机抽屉打开状态 */
@@ -35,7 +35,12 @@ export default new Vuex.Store({
     },
     setToken (state, token) {
       state.token = token
-      setToken(token)
+      setTokenInLs(token)
+    },
+    removeToken (state) {
+      state.userInfo = null
+      state.token = null
+      removeTokenInLs()
     }
   },
   actions: {

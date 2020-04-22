@@ -12,22 +12,28 @@
           <div class="animated bounceInRight">{{$t('login.title2')}}</div>
         </div>
         <div class="login-input">
-          <el-input
-            class="phoneInput animated rotateInDownLeft"
-            ref="phoneInput"
-            :placeholder="$t('login.phonePlaceHolder')"
-            prefix-icon="el-icon-phone-outline" v-model="phoneNum" clearable
-            @focus="phoneFocus">
-          </el-input>
-          <el-input class="passwordInput animated rotateInUpRight"
-                    :placeholder="$t('login.pwdPlaceHolder')"
-                    prefix-icon="el-icon-key" v-model="password" show-password>
-          </el-input>
+          <el-form :model="loginForm" :rules="rules" ref="loginForm">
+            <el-form-item prop="email" class="spacingStyle">
+              <el-input
+                class="animated rotateInDownLeft"
+                :placeholder="$t('login.emailPlaceHolder')"
+                prefix-icon="el-icon-user" v-model="loginForm.email" clearable
+              >
+              </el-input>
+            </el-form-item>
+            <el-form-item prop="password" class="spacingStyle">
+              <el-input class="passwordInput animated rotateInUpRight"
+                        :placeholder="$t('login.pwdPlaceHolder')"
+                        prefix-icon="el-icon-key" v-model="loginForm.password" show-password>
+              </el-input>
+            </el-form-item>
+          </el-form>
         </div>
         <div class="remSwitch animated fadeInLeft">
           <div>
             <span style="color: gray;font-size: 14px">{{$t('login.noAccountTip')}}</span>
-            <el-link class="regLink" :underline="false" type="primary" @click="goRegister">{{$t('login.register')}}</el-link>
+            <el-link class="regLink" :underline="false" type="primary" @click="goRegister">{{$t('login.register')}}
+            </el-link>
           </div>
           <div>
             <el-switch v-model="rememberPsd"/>
@@ -43,7 +49,6 @@
 <script>
 import myLogo from '@/components/nav/myLogo'
 import LangSelect from '@/components/LangSelect'
-import { login } from '@/api/user'
 
 export default {
   name: 'login',
@@ -52,9 +57,33 @@ export default {
     LangSelect
   },
   data () {
+    let checkEmail = (rule, value, callback) => {
+      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+      if (!value) {
+        return callback(new Error(this.$t('register.emailNullError')))
+      }
+      setTimeout(() => {
+        if (mailReg.test(value)) {
+          callback()
+        } else {
+          callback(new Error(this.$t('register.emailFormatError')))
+        }
+      }, 100)
+    }
     return {
-      phoneNum: '17356526878',
-      password: '123456',
+      loginForm: {
+        email: '',
+        password: ''
+      },
+      rules: {
+        email: [
+          { validator: checkEmail, trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: this.$t('register.pswNullError'), trigger: 'blur' },
+          { min: 5, max: 12, message: this.$t('register.pswFormatError'), trigger: 'blur' }
+        ]
+      },
       rememberPsd: false
     }
   },
@@ -67,17 +96,25 @@ export default {
     goRegister () {
       this.$router.replace({ path: 'register' })
     },
-    phoneFocus () {
+    emailFocus () {
     },
     login () {
-      login({ phone: this.phoneNum, password: this.password }).then(req => {
-        this.$router.replace({ path: '/' })
-        this.$store.commit('setToken', req.data)
-        console.log(this.$store.state.token)
-      }).catch(err => {
-        console.log(err)
-      })
-      // this.$store.commit('saveUserInfo', { phoneNum: this.phoneNum, password: this.password })
+      const data = { email: this.emailNum, password: this.password }
+      this.$http.post('pub/login', this.$qs.stringify(data))
+        .then(req => {
+          alert(req.data)
+          this.$router.replace({ path: '/' })
+          this.$store.commit('setToken', req.data)
+        }).catch(err => {
+          console.log(err)
+        })
+        /* login({ email: this.emailNum, password: this.password }).then(req => {
+          this.$router.replace({ path: '/' })
+          this.$store.commit('setToken', req.data)
+        }).catch(err => {
+          console.log(err)
+        }) */
+      // this.$store.commit('saveUserInfo', { emailNum: this.emailNum, password: this.password })
     }
   }
 }
@@ -106,7 +143,7 @@ export default {
   .splitRedis {
     padding: 3px;
     align-self: center;
-    margin: 0 10px;
+    margin: 0 3px;
     background-color: gray;
     border-radius: 3px;
   }
@@ -119,14 +156,15 @@ export default {
     color: #66B1FF;
     margin: 30px 0;
   }
-  .chose-lang{
+
+  .chose-lang {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
   }
 
-  .phoneInput {
-    margin-bottom: 30px;
+  .spacingStyle {
+    margin-bottom: 40px;
   }
 
   .passwordInput {
