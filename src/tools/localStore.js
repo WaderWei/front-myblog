@@ -1,7 +1,6 @@
 import constantVar from './constantVar'
 
 export function getTokenInLs () {
-  console.log(sessionStorage.getItem(constantVar.TokenKey))
   return sessionStorage.getItem(constantVar.TokenKey)
 }
 

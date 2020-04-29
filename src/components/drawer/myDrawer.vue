@@ -9,7 +9,7 @@
       <div>
         <div class="drawer-head">
           <el-avatar class="head-img" :size="100" icon="el-icon-user-solid" :src=headPath></el-avatar>
-          <span>weiqiyou</span>
+          <span style="font-size: 14px">{{$store.state.userInfo.userEmail}}</span>
         </div>
         <div class="drawer-menu">
           <el-menu
@@ -49,7 +49,6 @@
 
 <script>
 import constantVar from '@/tools/constantVar.js'
-import { logout } from '@/api/user'
 
 export default {
   name: 'myDrawer',

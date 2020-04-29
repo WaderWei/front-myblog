@@ -99,12 +99,12 @@ export default {
     emailFocus () {
     },
     login () {
-      const data = { email: this.emailNum, password: this.password }
+      const data = { email: this.loginForm.email, password: this.loginForm.password }
       this.$http.post('pub/login', this.$qs.stringify(data))
-        .then(req => {
-          alert(req.data)
-          this.$router.replace({ path: '/' })
-          this.$store.commit('setToken', req.data)
+        .then(res => {
+          if (res.data) {
+            this.$router.replace({ path: '/' })
+          }
         }).catch(err => {
           console.log(err)
         })

@@ -10,7 +10,6 @@ axios.defaults.timeout = 50000
 // 开始加载动画
 let loading
 function openLoading () {
-  console.log('启动。。。')
   loading = Loading.service({
     lock: true, // 是否锁定
     text: '拼命加载中...', // 加载中需要显示的文字
@@ -19,7 +18,6 @@ function openLoading () {
 }
 // 结束加载动画
 function closeLoading () {
-  console.log('关闭。。。')
   loading.close()
 }
 

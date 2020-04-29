@@ -40,6 +40,11 @@ const routes = [
     component: () => import('@/views/home/register.vue')
   },
   {
+    path: '/repairLang',
+    name: 'repairLang',
+    component: () => import('@/views/bug/RepairLang.vue')
+  },
+  {
     path: '/md',
     name: 'md',
     component: () => import('@/views/test/MarkDownDemo.vue')

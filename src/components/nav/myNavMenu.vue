@@ -48,7 +48,6 @@ import myLogo from '@/components/nav/myLogo'
 import myElMenu from '@/components/nav/myElMenu'
 import myAvatar from '@/components/nav/myAvatar.vue'
 import myMsg from '@/components/nav/myMsg.vue'
-import { getInfo } from '@/api/user'
 
 export default {
   name: 'myNavMenu',
@@ -65,14 +64,6 @@ export default {
     }
   },
   created () {
-    let token = this.$store.state.token
-    // 登录
-    if (token) {
-      this.$http.get('authc/user/info')
-        .then(res => {
-          this.$store.commit('saveUserInfo', res.data)
-        }).catch(err => console.log(err))
-    }
   },
   methods: {
     searchBlur () {

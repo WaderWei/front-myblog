@@ -22,6 +22,7 @@ import myDrawer from '@/components/drawer/myDrawer'
 import myPhoneDrawer from '@/components/drawer/myPhoneDrawer'
 import leftMain from '@/components/content/leftMain'
 import rightMain from '@/components/content/rightMain'
+import { getToken } from '@/tools/auth'
 
 export default {
   name: 'index',
@@ -40,7 +41,7 @@ export default {
     }
   },
   created () {
-
+    this.getUserInfo()
   },
   mounted () {
     let oldTop = 0 // 旧数据，初始为0
@@ -63,6 +64,17 @@ export default {
   methods: {
     openLogin () {
       this.loginVisible = true
+    },
+    getUserInfo () {
+      if (!getToken()) { // 没有token既没有登录
+        return
+      }
+      this.$http.get('user/authc/info')
+        .then(res => {
+          console.log(res)
+          this.$store.commit('saveUserInfo', res.data)
+          console.log(this.$store.state.userInfo.userEmail)
+        }).catch(err => console.log(err))
     }
   }
 }

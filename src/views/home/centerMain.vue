@@ -25,6 +25,8 @@ export default {
     myCarousel,
     myHotArticle,
     myHomeArticle
+  },
+  created () {
   }
 }
 </script>

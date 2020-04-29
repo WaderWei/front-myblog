@@ -36,7 +36,7 @@
                 >
                 </el-input>
               </el-form-item>
-              <el-button class="animated fadeInLeft" @click="getCode" type="success">{{$t('register.getCaptcha')}}</el-button>
+              <el-button class="animated fadeInLeft" :disabled="btn.disabled" @click="clickCodeBtn" type="success">{{btn.content}}</el-button>
             </div>
           </el-form>
         </div>
@@ -58,7 +58,6 @@
 <script>
 import myLogo from '@/components/nav/myLogo'
 import LangSelect from '@/components/LangSelect'
-
 export default {
   name: 'register',
   components: {
@@ -77,6 +76,7 @@ export default {
       this.checkEmailIsRegister(value, callback)
     }
     return {
+      countDownInterval: null,
       registerForm: {
         email: '',
         password: '',
@@ -94,10 +94,20 @@ export default {
           { required: true, message: this.$t('register.verityNullError'), trigger: 'blur' },
           { min: 5, max: 5, message: this.$t('register.verityFormatError'), trigger: 'blur' }
         ]
+      },
+      btn: {
+        disabled: false,
+        content: this.$t('register.getCaptcha'),
+        num: 300
       }
     }
   },
   created () {
+  },
+  watch: {// 重点** 解决i18n 切换语言，js中写时语言不切换
+    '$i18n.locale' () {
+      this.btn.content = this.$t('register.getCaptcha')
+    }
   },
   methods: {
     backHome () {
@@ -109,16 +119,37 @@ export default {
     register () {
       this.$refs['registerForm'].validate((valid) => {
         if (valid) {
-          alert('submit!')
-        } else {
-          return false
+          this.$http.post('pub/register', this.$qs.stringify(this.registerForm))
+            .then(res => {
+              if (!this.countDownInterval) {
+                clearInterval(this.countDownInterval)
+              }
+              if (res.data) {
+                this.$alert('注册成功,将跳转到登录页面', '成功', {
+                  confirmButtonText: '确定',
+                  callback: action => {
+                    this.$message({
+                      type: 'info',
+                      message: `action: ${action}`
+                    })
+                    this.$router.push({ path: 'login' })
+                  }
+                })
+              } else {
+                this.$message({
+                  showClose: true,
+                  message: '验证码错误',
+                  type: 'error'
+                })
+              }
+            })
         }
       })
     },
     emailFocus () {
     },
     async checkEmailIsRegister (val, callback) {
-      let result = await this.$http.get('pub/verifyExist', {
+      let result = await this.$http.get('user/pub/verifyExist', {
         params: {
           email: val
         }
@@ -130,16 +161,58 @@ export default {
       }
     },
     getCode () {
-      this.$refs['registerForm'].validateField(['email', 'password'], validateMsg => {
-        if (!validateMsg) {
-          let data = { email: this.registerForm.email, password: this.registerForm.password }
-          this.$http.post('pub/code', this.$qs.stringify(data))
-            .then(res => {
-              if (res.code === 200) {
-
-              }
-            })
+      this.countDownInterval = this.countDown()
+      let data = { email: this.registerForm.email, password: this.registerForm.password }
+      this.$http.post('user/pub/code', this.$qs.stringify(data))
+        .then(res => {
+          if (res.code !== 200) {
+            this.btn.disabled = false
+            this.btn.content = this.$t('register.getCaptcha')
+            this.btn.num = 300
+            if (this.countDownInterval != null) {
+              clearInterval(this.countDownInterval)
+            }
+          }
+        })
+    },
+    countDown () {
+      let that = this
+      this.btn.disabled = true // 按钮不可用
+      this.countDownInterval = setInterval(function () {
+        if (that.btn.num < 1) {
+          that.btn.disabled = false
+          that.btn.content = that.$t('register.getCaptcha')
+          clearInterval(this.countDownInterval)
+        } else {
+          that.btn.content = that.btn.num
+          that.btn.num--
         }
+      }, 1000)
+    },
+    clickCodeBtn () {
+      this.waitValid().then(b => {
+        if (b) {
+          this.getCode()
+        } else {
+          console.log(b)
+        }
+      })
+    },
+    /* 重点** 一个异步的方法执行完，再执行其它方法的解决方案 */
+    waitEmail () {
+      return new Promise((resolve, reject) => {
+        this.$refs['registerForm'].validateField('email', validateMsg => {
+          resolve(!validateMsg)
+        })
+      })
+    },
+    waitValid () {
+      return new Promise((resolve, reject) => {
+        this.waitEmail().then(b => {
+          this.$refs['registerForm'].validateField('password', validateMsg => {
+            resolve(!validateMsg && b)
+          })
+        })
       })
     }
   }

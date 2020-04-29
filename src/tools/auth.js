@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-import constantVar from '@/constantVar'
+import constantVar from '@/tools/constantVar'
 
 export function getToken () {
   return Cookies.get(constantVar.TokenKey)

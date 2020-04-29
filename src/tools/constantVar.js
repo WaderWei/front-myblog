@@ -2,7 +2,7 @@
 /* 头像路径 */
 const headPath = require('@/assets/head.jpg')
 const logoPath = require('@/assets/logo.png')
-const TokenKey = 'auth-token'
+const TokenKey = 'BL_TOKEN'
 const phoneWidth = 420
 const menuValues = new Map()
 menuValues.set('main', '首页')
