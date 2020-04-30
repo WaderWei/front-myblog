@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     language: Cookies.get('language') || 'zh',
     token: getTokenInLs() || null,
-    userInfo: {},
+    userInfo: null,
     /* 抽屉打开状态 */
     drawer: false,
     /* 手机抽屉打开状态 */

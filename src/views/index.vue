@@ -66,14 +66,10 @@ export default {
       this.loginVisible = true
     },
     getUserInfo () {
-      if (!getToken()) { // 没有token既没有登录
-        return
-      }
       this.$http.get('user/authc/info')
         .then(res => {
           console.log(res)
           this.$store.commit('saveUserInfo', res.data)
-          console.log(this.$store.state.userInfo.userEmail)
         }).catch(err => console.log(err))
     }
   }

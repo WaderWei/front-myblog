@@ -27,7 +27,7 @@
       </div>
       <!--heard-->
       <div class="nav-right">
-        <div class="logined" v-if="$store.state.userInfo">
+        <div class="logined" v-if="!!$store.state.userInfo">
           <my-msg class="hidden-sm-and-down"/>
           <my-avatar/>
         </div>

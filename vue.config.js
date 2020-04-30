@@ -4,8 +4,8 @@ module.exports = {
   lintOnSave: true, // 是否开启eslint
   devServer: {
     open: false, // 是否自动弹出浏览器页面
-    host: '192.168.0.104',
-    port: '8080',
+    host: '192.168.0.120',
+    port: '8081',
     https: false, // 是否使用https协议
     hotOnly: false, // 是否开启热更新
     proxy: null

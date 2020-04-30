@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="$store.state.userInfo">
     <el-drawer
       :visible.sync="$store.state.drawer"
       :direction="direction"
@@ -56,7 +56,8 @@ export default {
     return {
       // drawer: this.$store.state.drawer,
       headPath: constantVar.headPath,
-      direction: 'rtl'
+      direction: 'rtl',
+      name: '请登录'
     }
   },
   created () {
@@ -78,9 +79,9 @@ export default {
         case '4':
           break
         case '5':
-          this.$http.get().then(res => {
-            this.$store.commit('removeToken')
-          }).catch(err => console.log(err))
+          /* this.$http.get().then(res => { */
+          this.$store.commit('removeToken')
+          /* }).catch(err => console.log(err)) */
           break
       }
       this.$store.commit('changeDrawer', false)
